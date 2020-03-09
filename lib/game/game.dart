@@ -26,6 +26,8 @@ class Game {
   void start(Team toss, batting) {
     this.tossTeam = toss;
     this.battingTeam = batting;
+    this.battingTeam.isBatting = true;
+    this.bowlingTeam.isBatting = false;
   }
 }
 

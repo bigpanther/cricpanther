@@ -1,7 +1,8 @@
+import 'package:cricket_scorer/scoresheet.dart';
+
 import 'package:flutter/material.dart';
 
 import 'game/game.dart';
-import 'game_meta.dart';
 
 const _defaultHomeTeamName = "Home Team";
 const _defaultAwayTeamName = "Away Team";
@@ -33,46 +34,49 @@ class GameCreateState extends State<GameCreate> {
           children: <Widget>[
             Form(
               key: _formKey,
-              child: Column(children: <Widget>[
-                TextFormField(
-                  maxLength: 30,
-                  autocorrect: false,
-                  maxLengthEnforced: true,
-                  decoration: const InputDecoration(
-                    hintText: '$_defaultHomeTeamName name',
-                    labelText: '$_defaultHomeTeamName Name *',
-                    counterText: '',
+              child: Padding(
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Column(children: <Widget>[
+                  TextFormField(
+                    maxLength: 30,
+                    autocorrect: false,
+                    maxLengthEnforced: true,
+                    decoration: const InputDecoration(
+                      hintText: '$_defaultHomeTeamName name',
+                      labelText: '$_defaultHomeTeamName Name *',
+                      counterText: '',
+                    ),
+                    validator: (value) {
+                      return checkRequired(value);
+                    },
+                    onSaved: (val) => setState(() => homeTeamName = val),
                   ),
-                  validator: (value) {
-                    return checkRequired(value);
-                  },
-                  onSaved: (val) => setState(() => homeTeamName = val),
-                ),
-                TextFormField(
-                  maxLength: 30,
-                  autocorrect: false,
-                  maxLengthEnforced: true,
-                  decoration: const InputDecoration(
-                    hintText: '$_defaultAwayTeamName name',
-                    labelText: '$_defaultAwayTeamName Name *',
-                    counterText: '',
+                  TextFormField(
+                    maxLength: 30,
+                    autocorrect: false,
+                    maxLengthEnforced: true,
+                    decoration: const InputDecoration(
+                      hintText: '$_defaultAwayTeamName name',
+                      labelText: '$_defaultAwayTeamName Name *',
+                      counterText: '',
+                    ),
+                    validator: (value) {
+                      return checkRequired(value);
+                    },
+                    onSaved: (val) => setState(() => awayTeamName = val),
                   ),
-                  validator: (value) {
-                    return checkRequired(value);
-                  },
-                  onSaved: (val) => setState(() => awayTeamName = val),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      Navigator.pushNamed(context, GameMeta.routeName,
-                          arguments: Game(homeTeamName, awayTeamName));
-                    }
-                  },
-                  child: Text('Start game'),
-                ),
-              ]),
+                  RaisedButton(
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        _formKey.currentState.save();
+                        Navigator.pushNamed(context, Scoresheet.routeName,
+                            arguments: Game(homeTeamName, awayTeamName));
+                      }
+                    },
+                    child: Text('Start game'),
+                  ),
+                ]),
+              ),
             ),
           ],
         ),
