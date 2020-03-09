@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'game.dart';
+import 'package:cricket_scorer/game/game.dart';
+import 'package:cricket_scorer/game/team.dart';
+import 'package:cricket_scorer/game/player.dart';
 import 'main.dart';
 
 class GameMeta extends StatefulWidget {

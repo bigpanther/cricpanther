@@ -1,3 +1,8 @@
+import 'team.dart';
+import 'player.dart';
+import 'enums/extra.dart';
+import 'enums/out.dart';
+
 class Game {
   int runs = 0;
   int balls = 0;
@@ -37,55 +42,6 @@ class EventProcessor {
       event.undo(game);
     }
   }
-}
-
-class Player {
-  String name;
-  Player(this.name);
-  Handedness batting = Handedness.right;
-  Handedness bowling = Handedness.right;
-  bool isEditing = false;
-}
-
-enum Handedness { right, left }
-
-class Team {
-  String name;
-  Team(this.name) : assert(name.trim().length != 0) {
-    players = List(12);
-    for (var i = 0; i < players.length; i++) {
-      var manIndex = i + 1;
-      players[i] = Player('Player $manIndex');
-    }
-  }
-  bool isBatting = false;
-  List<Player> players;
-  bool isBowling() {
-    return !isBatting;
-  }
-}
-
-enum Out {
-  none,
-  bowled,
-  caught,
-  lbw,
-  stumped,
-  runOut,
-  timeOut,
-  hitWicket,
-  obstruction,
-  retired,
-  hitTwice,
-}
-
-enum Extra {
-  none,
-  wide,
-  noBall,
-  bye,
-  legBye,
-  penalty,
 }
 
 abstract class GameEvent {

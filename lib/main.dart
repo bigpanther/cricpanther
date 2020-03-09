@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'game.dart';
+import 'game/game.dart';
 import 'game_create.dart';
-
 import 'game_meta.dart';
 
 void main() => runApp(MyApp());
@@ -44,16 +41,13 @@ class _ScoresheetState extends State<Scoresheet> {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController();
   }
 
-  ScrollController _controller;
   int _noOfBalls = 0;
   Game _game;
   final runs = List<int>.generate(300, (i) => i % 6);
@@ -120,10 +114,6 @@ class _ScoresheetState extends State<Scoresheet> {
 
   @override
   Widget build(BuildContext context) {
-    Timer(
-        Duration(milliseconds: 1000),
-        () => _controller.animateTo(_controller.position.maxScrollExtent,
-            duration: Duration(seconds: 1), curve: Curves.easeOutCirc));
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from thre Scoresheet object that was created by
@@ -240,7 +230,6 @@ class _ScoresheetState extends State<Scoresheet> {
                     shrinkWrap: false,
                     padding: EdgeInsets.only(right: 20),
                     scrollDirection: Axis.horizontal,
-                    controller: _controller,
                     itemCount: _noOfBalls,
                     separatorBuilder: (context, index) =>
                         buildDivider(index + 1),

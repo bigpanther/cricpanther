@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'game.dart';
+import 'game/game.dart';
 import 'game_meta.dart';
 
 const _defaultHomeTeamName = "Home Team";
