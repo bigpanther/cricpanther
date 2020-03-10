@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:cricket_scorer/game/game.dart';
-import 'package:cricket_scorer/game/player.dart';
 import 'package:cricket_scorer/scoresheet/scoresheet.dart';
+import 'package:cricket_scorer/widgets/scoreboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
@@ -45,63 +43,35 @@ class ScorePage extends StatelessWidget {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(children: [
-          Card(
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(children: [
-                Text.rich(TextSpan(
-                  children: <InlineSpan>[
-                    TextSpan(text: scoresheet.currentRuns.toString()),
-                    TextSpan(text: '/'),
-                    TextSpan(text: scoresheet.currentWickets.toString()),
-                  ],
-                  style: Theme.of(context).textTheme.display4,
-                )),
-                Text.rich(TextSpan(
-                  children: <InlineSpan>[
-                    TextSpan(text: '('),
-                    TextSpan(text: scoresheet.overs()),
-                    TextSpan(text: ')'),
-                  ],
-                  style: Theme.of(context).textTheme.display2,
-                )),
-              ]),
-            ),
-          ),
+          scoreboard(scoresheet, context),
           Card(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  game.battingTeam.name,
-                  style: Theme.of(context).textTheme.headline,
-                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    '${game.battingTeam.name} - Batting',
+                    style: Theme.of(context).textTheme.headline,
+                  ),
+                ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            '${scoresheet.currentBatter1.name}*',
-                          ),
-                          Text(
-                            scoresheet.currentBatter2.name,
-                          )
-                        ],
+                      Text(
+                        '${scoresheet.currentBatter1.name}*',
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            '${scoresheet.currentBatter1.runsScored}(${scoresheet.currentBatter1.ballsFaced})',
-                          ),
-                          Text(
-                            '${scoresheet.currentBatter2.runsScored}(${scoresheet.currentBatter2.ballsFaced})',
-                          )
-                        ],
+                      Text(
+                        '${scoresheet.currentBatter1.runsScored}(${scoresheet.currentBatter1.ballsFaced})',
+                      ),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        scoresheet.currentBatter2.name,
+                      ),
+                      Text(
+                        '${scoresheet.currentBatter2.runsScored}(${scoresheet.currentBatter2.ballsFaced})',
                       ),
                     ]),
               ],
@@ -111,36 +81,30 @@ class ScorePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  game.bowlingTeam.name,
-                  style: Theme.of(context).textTheme.headline,
-                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    '${game.bowlingTeam.name} - Bowling',
+                    style: Theme.of(context).textTheme.headline,
+                  ),
+                ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            '${scoresheet.currentBowler1.name}*',
-                          ),
-                          Text(
-                            scoresheet.currentBowler2.name,
-                          ),
-                        ],
+                      Text(
+                        '${scoresheet.currentBowler1.name}*',
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            '${scoresheet.currentBowler1.oversBowled}-${scoresheet.currentBowler1.maidensBowled}-${scoresheet.currentBowler1.runsConceded}-${scoresheet.currentBowler1.wicketsTaken}',
-                          ),
-                          Text(
-                            '${scoresheet.currentBowler2.oversBowled}-${scoresheet.currentBowler2.maidensBowled}-${scoresheet.currentBowler2.runsConceded}-${scoresheet.currentBowler2.wicketsTaken}',
-                          ),
-                        ],
+                      Text(
+                        '${scoresheet.currentBowler1.oversBowled}-${scoresheet.currentBowler1.maidensBowled}-${scoresheet.currentBowler1.runsConceded}-${scoresheet.currentBowler1.wicketsTaken}',
+                      ),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        scoresheet.currentBowler2.name,
+                      ),
+                      Text(
+                        '${scoresheet.currentBowler2.oversBowled}-${scoresheet.currentBowler2.maidensBowled}-${scoresheet.currentBowler2.runsConceded}-${scoresheet.currentBowler2.wicketsTaken}',
                       ),
                     ]),
                 Container(
