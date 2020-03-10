@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:cricket_scorer/game/game.dart';
+import 'package:cricket_scorer/game/player.dart';
 import 'package:cricket_scorer/scoresheet/scoresheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 import 'package:provider/provider.dart';
 
 class ScorePage extends StatelessWidget {
@@ -179,6 +183,12 @@ class ScorePage extends StatelessWidget {
               onPressed: scoresheet.addWicket,
               child: Text('W+'),
             ),
+            RaisedButton(
+              child: Text('Select player'),
+              onPressed: () {
+                showPlayerPicker(context, game);
+              },
+            ),
           ]),
         ]),
       ),
@@ -205,5 +215,19 @@ class ScorePage extends StatelessWidget {
       height: 0,
       width: 0,
     );
+  }
+
+  showPlayerPicker(BuildContext context, Game game) {
+    Picker(
+        adapter: PickerDataAdapter<String>(
+            pickerdata: game.battingTeam.players.map((f) => f.name).toList()),
+        changeToFirst: true,
+        hideHeader: true,
+        title: Text("Select player"),
+        selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
+        onConfirm: (Picker picker, List value) {
+          print(value.toString());
+          print(picker.adapter.text);
+        }).showDialog(context); //_scaffoldKey.currentState);
   }
 }

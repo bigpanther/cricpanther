@@ -1,7 +1,5 @@
-import 'package:cricket_scorer/score_page_builder.dart';
-
+import 'package:cricket_scorer/screens/score_page_builder.dart';
 import 'package:flutter/material.dart';
-
 import 'package:cricket_scorer/game/game.dart';
 import 'package:cricket_scorer/game/team.dart';
 import 'package:cricket_scorer/game/player.dart';

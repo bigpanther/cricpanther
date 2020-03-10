@@ -1,9 +1,9 @@
-import 'package:cricket_scorer/game_create.dart';
-import 'package:cricket_scorer/score_page_builder.dart';
+import 'package:cricket_scorer/game/game.dart';
+import 'package:cricket_scorer/screens/game_create.dart';
+import 'package:cricket_scorer/screens/game_meta.dart';
+import 'package:cricket_scorer/screens/score_page_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'game/game.dart';
-import 'game_meta.dart';
 
 void main() => runApp(MyApp());
 const _defaultHomeTeamName = "Home Team";

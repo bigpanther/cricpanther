@@ -1,3 +1,4 @@
+import 'package:cricket_scorer/game/delivery.dart';
 import 'package:cricket_scorer/game/overs.dart';
 import 'package:cricket_scorer/game/player.dart';
 import 'package:cricket_scorer/game/player_picker.dart';
@@ -66,14 +67,30 @@ class Scoresheet with ChangeNotifier {
     if (isCurrentMaiden) {
       currentBowler1.maidensBowled++;
     }
-    //swap strike
+    changeStrike();
+    changeBowler();
+    isCurrentMaiden = true;
+    notifyListeners();
+  }
+
+  changeStrike() {
     var t = currentBatter1;
     currentBatter1 = currentBatter2;
     currentBatter2 = t;
     t = currentBowler1;
+  }
+
+  changeBowler() {
+    var t = currentBowler1;
     currentBowler1 = currentBowler2;
     currentBowler2 = t;
-    isCurrentMaiden = true;
+  }
+
+  recordDelivery(Delivery delivery) {
+    notifyListeners();
+  }
+
+  undoDelivery(Delivery delivery) {
     notifyListeners();
   }
 

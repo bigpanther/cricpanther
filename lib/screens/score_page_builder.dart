@@ -1,10 +1,9 @@
 import 'package:cricket_scorer/game/player_picker.dart';
-import 'package:cricket_scorer/score_page.dart';
+import 'package:cricket_scorer/screens/score_page.dart';
 import 'package:cricket_scorer/scoresheet/scoresheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'game/game.dart';
+import 'package:cricket_scorer/game/game.dart';
 
 class ScorePageBuilder extends StatelessWidget {
   static final String routeName = '/scorepage';
