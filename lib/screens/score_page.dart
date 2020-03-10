@@ -1,5 +1,7 @@
 import 'package:cricket_scorer/game/game.dart';
 import 'package:cricket_scorer/scoresheet/scoresheet.dart';
+import 'package:cricket_scorer/widgets/batter_summary.dart';
+import 'package:cricket_scorer/widgets/bowler_summary.dart';
 import 'package:cricket_scorer/widgets/scoreboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,26 +56,8 @@ class ScorePage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline,
                   ),
                 ]),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${scoresheet.currentBatter1.name}*',
-                      ),
-                      Text(
-                        '${scoresheet.currentBatter1.runsScored}(${scoresheet.currentBatter1.ballsFaced})',
-                      ),
-                    ]),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        scoresheet.currentBatter2.name,
-                      ),
-                      Text(
-                        '${scoresheet.currentBatter2.runsScored}(${scoresheet.currentBatter2.ballsFaced})',
-                      ),
-                    ]),
+                batterSummary(scoresheet.currentBatter1, true),
+                batterSummary(scoresheet.currentBatter2, false),
               ],
             ),
           ),
@@ -87,54 +71,35 @@ class ScorePage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline,
                   ),
                 ]),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${scoresheet.currentBowler1.name}*',
-                      ),
-                      Text(
-                        '${scoresheet.currentBowler1.oversBowled}-${scoresheet.currentBowler1.maidensBowled}-${scoresheet.currentBowler1.runsConceded}-${scoresheet.currentBowler1.wicketsTaken}',
-                      ),
-                    ]),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        scoresheet.currentBowler2.name,
-                      ),
-                      Text(
-                        '${scoresheet.currentBowler2.oversBowled}-${scoresheet.currentBowler2.maidensBowled}-${scoresheet.currentBowler2.runsConceded}-${scoresheet.currentBowler2.wicketsTaken}',
-                      ),
-                    ]),
-                Container(
-                  height: 50,
-                  child: ListView.separated(
-                    shrinkWrap: false,
-                    padding: EdgeInsets.only(right: 20),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: scoresheet.currentBalls,
-                    separatorBuilder: (context, index) =>
-                        buildDivider(index + 1),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(top: 3, bottom: 3),
-                        width: 55,
-                        child: Center(
-                          child: Text(
-                            runs[index].toString(),
-                            style: Theme.of(context).textTheme.title,
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                            color: Colors.red, shape: BoxShape.circle),
-                      );
-                    },
-                  ),
-                  //shrinkWrap: true,
-                )
+                bowlerSummary(scoresheet.currentBowler1, true),
+                bowlerSummary(scoresheet.currentBowler2, false),
               ],
             ),
+          ),
+          Container(
+            height: 50,
+            child: ListView.separated(
+              shrinkWrap: false,
+              padding: EdgeInsets.only(right: 20),
+              scrollDirection: Axis.horizontal,
+              itemCount: scoresheet.currentBalls,
+              separatorBuilder: (context, index) => buildDivider(index + 1),
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(top: 3, bottom: 3),
+                  width: 55,
+                  child: Center(
+                    child: Text(
+                      runs[index].toString(),
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                  ),
+                  decoration:
+                      BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+                );
+              },
+            ),
+            //shrinkWrap: true,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
