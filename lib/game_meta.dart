@@ -1,4 +1,5 @@
-import 'package:cricket_scorer/scoresheet.dart';
+import 'package:cricket_scorer/score_page_builder.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:cricket_scorer/game/game.dart';
@@ -49,8 +50,10 @@ class GameMetaState extends State<GameMeta> {
             Column(children: <Widget>[
               RaisedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Scoresheet.routeName,
-                      arguments: game);
+                  Navigator.pushNamed(
+                    context,
+                    ScorePageBuilder.routeName,
+                  );
                 },
                 child: Text('Start Scoring'),
               ),

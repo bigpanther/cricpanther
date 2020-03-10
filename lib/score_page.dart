@@ -1,85 +1,24 @@
 import 'package:cricket_scorer/game/game.dart';
+import 'package:cricket_scorer/scoresheet/scoresheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Scoresheet extends StatefulWidget {
-  static final String routeName = '/scoresheet';
-  final Game game;
-  Scoresheet({Key key, this.title, this.game}) : super(key: key);
+class ScorePage extends StatelessWidget {
+  static final String routeName = '/scorepage';
   final String title;
+  ScorePage({Key key, this.title}) : super(key: key);
 
-  @override
-  _ScoresheetState createState() => _ScoresheetState(game);
-}
-
-String overs(int noOfBalls) {
-  if (noOfBalls < 1) {
-    return "0.0";
-  }
-  int over = noOfBalls ~/ 6;
-  int ball = noOfBalls % 6;
-  return '$over.$ball';
-}
-
-class _ScoresheetState extends State<Scoresheet> {
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  int _noOfBalls = 0;
-  Game _game;
   final runs = List<int>.generate(300, (i) => i % 6);
-  _ScoresheetState(Game game) {
-    _game = game;
-    _game.start(_game.awayTeam, _game.homeTeam);
-  }
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _noOfBalls without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _noOfBalls++;
-    });
-  }
 
-  void _incrementWickets() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _noOfBalls without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _game.wickets++;
-    });
-  }
-
-  void _incrementScore(int runs) {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _noOfBalls without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _game.runs = _game.runs + runs;
-    });
-  }
-
-  List<Widget> _scoringButtons() {
+  List<Widget> _scoringButtons(Scoresheet scoresheet) {
     List<Widget> runButtons = List(6);
     for (var i = 0; i < 6; i++) {
       runButtons[i] = FloatingActionButton(
         heroTag: 'h$i',
         shape: CircleBorder(side: BorderSide.none),
         onPressed: () {
-          _incrementScore(i + 1);
+          scoresheet.addRuns(i + 1);
         },
         child: Text((i + 1).toString()),
       );
@@ -89,12 +28,14 @@ class _ScoresheetState extends State<Scoresheet> {
 
   @override
   Widget build(BuildContext context) {
-    print('$_game.homeTeam.name');
+    var game = Provider.of<Game>(context, listen: false);
+    var scoresheet = Provider.of<Scoresheet>(context, listen: true);
+    print('rebuild scorepage');
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from thre Scoresheet object that was created by
+        // Here we take the value from thre ScorePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(this.title),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -106,16 +47,16 @@ class _ScoresheetState extends State<Scoresheet> {
               child: Column(children: [
                 Text.rich(TextSpan(
                   children: <InlineSpan>[
-                    TextSpan(text: _game.runs.toString()),
+                    TextSpan(text: scoresheet.currentRuns.toString()),
                     TextSpan(text: '/'),
-                    TextSpan(text: _game.wickets.toString()),
+                    TextSpan(text: scoresheet.currentWickets.toString()),
                   ],
                   style: Theme.of(context).textTheme.display4,
                 )),
                 Text.rich(TextSpan(
                   children: <InlineSpan>[
                     TextSpan(text: '('),
-                    TextSpan(text: overs(_noOfBalls)),
+                    TextSpan(text: scoresheet.overs()),
                     TextSpan(text: ')'),
                   ],
                   style: Theme.of(context).textTheme.display2,
@@ -128,7 +69,7 @@ class _ScoresheetState extends State<Scoresheet> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  _game.battingTeam.name,
+                  game.battingTeam.name,
                   style: Theme.of(context).textTheme.headline,
                 ),
                 Row(
@@ -136,13 +77,13 @@ class _ScoresheetState extends State<Scoresheet> {
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Harsimran',
+                            '${scoresheet.currentBatter1.name}*',
                           ),
                           Text(
-                            'Ankit',
+                            scoresheet.currentBatter2.name,
                           )
                         ],
                       ),
@@ -150,19 +91,11 @@ class _ScoresheetState extends State<Scoresheet> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('*'),
-                          Text(''),
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
                           Text(
-                            '8(10)',
+                            '${scoresheet.currentBatter1.runsScored}(${scoresheet.currentBatter1.ballsFaced})',
                           ),
                           Text(
-                            '10(2)',
+                            '${scoresheet.currentBatter2.runsScored}(${scoresheet.currentBatter2.ballsFaced})',
                           )
                         ],
                       ),
@@ -175,7 +108,7 @@ class _ScoresheetState extends State<Scoresheet> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  _game.bowlingTeam.name,
+                  game.bowlingTeam.name,
                   style: Theme.of(context).textTheme.headline,
                 ),
                 Row(
@@ -183,10 +116,13 @@ class _ScoresheetState extends State<Scoresheet> {
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Rival Bowler',
+                            '${scoresheet.currentBowler1.name}*',
+                          ),
+                          Text(
+                            scoresheet.currentBowler2.name,
                           ),
                         ],
                       ),
@@ -195,7 +131,10 @@ class _ScoresheetState extends State<Scoresheet> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            '10.1-3-48-2',
+                            '${scoresheet.currentBowler1.oversBowled}-${scoresheet.currentBowler1.maidensBowled}-${scoresheet.currentBowler1.runsConceded}-${scoresheet.currentBowler1.wicketsTaken}',
+                          ),
+                          Text(
+                            '${scoresheet.currentBowler2.oversBowled}-${scoresheet.currentBowler2.maidensBowled}-${scoresheet.currentBowler2.runsConceded}-${scoresheet.currentBowler2.wicketsTaken}',
                           ),
                         ],
                       ),
@@ -206,7 +145,7 @@ class _ScoresheetState extends State<Scoresheet> {
                     shrinkWrap: false,
                     padding: EdgeInsets.only(right: 20),
                     scrollDirection: Axis.horizontal,
-                    itemCount: _noOfBalls,
+                    itemCount: scoresheet.currentBalls,
                     separatorBuilder: (context, index) =>
                         buildDivider(index + 1),
                     itemBuilder: (context, index) {
@@ -231,14 +170,22 @@ class _ScoresheetState extends State<Scoresheet> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: _scoringButtons(),
+            children: _scoringButtons(scoresheet),
           ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            FloatingActionButton(
+              heroTag: 'wkt',
+              shape: CircleBorder(side: BorderSide.none),
+              onPressed: scoresheet.addWicket,
+              child: Text('W+'),
+            ),
+          ]),
         ]),
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: "main",
         child: Icon(Icons.add),
-        onPressed: _incrementCounter,
+        onPressed: scoresheet.addBall,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation
           .centerFloat, // This trailing comma makes auto-formatting nicer for build methods.

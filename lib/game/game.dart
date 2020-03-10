@@ -1,12 +1,11 @@
+import 'package:flutter/material.dart';
+
 import 'team.dart';
 import 'player.dart';
 import 'enums/extra.dart';
 import 'enums/out.dart';
 
-class Game {
-  int runs = 0;
-  int balls = 0;
-  int wickets = 0;
+class Game with ChangeNotifier {
   int target = 0;
   int totalOvers = 0;
   Team homeTeam;
@@ -28,6 +27,7 @@ class Game {
     this.battingTeam = batting;
     this.battingTeam.isBatting = true;
     this.bowlingTeam.isBatting = false;
+    notifyListeners();
   }
 }
 

@@ -1,11 +1,9 @@
-import 'package:cricket_scorer/scoresheet.dart';
+import 'package:cricket_scorer/score_page_builder.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'game/game.dart';
-
-const _defaultHomeTeamName = "Home Team";
-const _defaultAwayTeamName = "Away Team";
 
 class GameCreate extends StatefulWidget {
   final String title;
@@ -23,6 +21,7 @@ class GameCreateState extends State<GameCreate> {
   String awayTeamName;
   @override
   Widget build(BuildContext context) {
+    var game = Provider.of<Game>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -41,9 +40,9 @@ class GameCreateState extends State<GameCreate> {
                     maxLength: 30,
                     autocorrect: false,
                     maxLengthEnforced: true,
-                    decoration: const InputDecoration(
-                      hintText: '$_defaultHomeTeamName name',
-                      labelText: '$_defaultHomeTeamName Name *',
+                    decoration: InputDecoration(
+                      hintText: '${game.homeTeam.name} name',
+                      labelText: '${game.homeTeam.name} Name *',
                       counterText: '',
                     ),
                     validator: (value) {
@@ -55,9 +54,9 @@ class GameCreateState extends State<GameCreate> {
                     maxLength: 30,
                     autocorrect: false,
                     maxLengthEnforced: true,
-                    decoration: const InputDecoration(
-                      hintText: '$_defaultAwayTeamName name',
-                      labelText: '$_defaultAwayTeamName Name *',
+                    decoration: InputDecoration(
+                      hintText: '${game.awayTeam.name} name',
+                      labelText: '${game.awayTeam.name} Name *',
                       counterText: '',
                     ),
                     validator: (value) {
@@ -69,8 +68,11 @@ class GameCreateState extends State<GameCreate> {
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         _formKey.currentState.save();
-                        Navigator.pushNamed(context, Scoresheet.routeName,
-                            arguments: Game(homeTeamName, awayTeamName));
+                        game.homeTeam.name = homeTeamName;
+                        game.awayTeam.name = awayTeamName;
+                        game.start(game.awayTeam, game.awayTeam);
+                        Navigator.pushReplacementNamed(
+                            context, ScorePageBuilder.routeName);
                       }
                     },
                     child: Text('Start game'),
