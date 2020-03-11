@@ -1,24 +1,24 @@
 import 'package:cricket_scorer/screens/score_page_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:cricket_scorer/game/game.dart';
-import 'package:cricket_scorer/game/team.dart';
-import 'package:cricket_scorer/game/player.dart';
+import 'package:cricket_scorer/match/match.dart';
+import 'package:cricket_scorer/match/team.dart';
+import 'package:cricket_scorer/match/player.dart';
 
-class GameMeta extends StatefulWidget {
-  static final routeName = "/gameMeta";
+class MatchMeta extends StatefulWidget {
+  static final routeName = "/matchMeta";
   final String title;
-  final Game game;
-  GameMeta({Key key, this.title, this.game}) : super(key: key);
+  final Match match;
+  MatchMeta({Key key, this.title, this.match}) : super(key: key);
   @override
-  GameMetaState createState() {
-    return GameMetaState(game);
+  MatchMetaState createState() {
+    return MatchMetaState(match);
   }
 }
 
-class GameMetaState extends State<GameMeta> {
-  final Game game;
-  GameMetaState(this.game) {
-    print("game state created");
+class MatchMetaState extends State<MatchMeta> {
+  final Match match;
+  MatchMetaState(this.match) {
+    print("match state created");
   }
   final _formKey = GlobalKey<FormState>();
   @override
@@ -32,7 +32,7 @@ class GameMetaState extends State<GameMeta> {
           //mainAxisAlignment: MainAxisAlignment.center,
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            buildTeamList(context, game.homeTeam),
+            buildTeamList(context, match.homeTeam),
             Column(
               children: <Widget>[
                 Text(
@@ -44,7 +44,7 @@ class GameMetaState extends State<GameMeta> {
                 ),
               ],
             ),
-            buildTeamList(context, game.awayTeam),
+            buildTeamList(context, match.awayTeam),
             Column(children: <Widget>[
               RaisedButton(
                 onPressed: () {

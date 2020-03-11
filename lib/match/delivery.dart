@@ -1,6 +1,6 @@
-import 'package:cricket_scorer/game/enums/extra.dart';
-import 'package:cricket_scorer/game/enums/out.dart';
-import 'package:cricket_scorer/game/player.dart';
+import 'package:cricket_scorer/match/enums/extra.dart';
+import 'package:cricket_scorer/match/enums/out.dart';
+import 'package:cricket_scorer/match/player.dart';
 
 class Delivery {
   int runs = 0;

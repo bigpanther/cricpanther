@@ -5,15 +5,15 @@ import 'player.dart';
 import 'enums/extra.dart';
 import 'enums/out.dart';
 
-class Game with ChangeNotifier {
+class Match with ChangeNotifier {
   int target = 0;
   int totalOvers = 0;
   Team homeTeam;
   Team awayTeam;
   Team tossTeam;
   Team battingTeam;
-  List<EventProcessor> gameEventsLog;
-  Game(String homeTeamName, awayTeamName) {
+  List<EventProcessor> matchEventsLog;
+  Match(String homeTeamName, awayTeamName) {
     homeTeam = Team(homeTeamName);
     awayTeam = Team(awayTeamName);
   }
@@ -35,27 +35,27 @@ enum EventProcessorType { add, undo }
 
 class EventProcessor {
   EventProcessorType type;
-  GameEvent event;
+  MatchEvent event;
   EventProcessor(this.type, this.event);
-  void record(Game game) {
+  void record(Match match) {
     if (type == EventProcessorType.add) {
-      event.process(game);
+      event.process(match);
     } else {
-      event.undo(game);
+      event.undo(match);
     }
   }
 }
 
-abstract class GameEvent {
+abstract class MatchEvent {
   DateTime eventTime;
-  GameEvent() {
+  MatchEvent() {
     eventTime = DateTime.now();
   }
-  void process(Game game);
-  void undo(Game game);
+  void process(Match match);
+  void undo(Match match);
 }
 
-class BallEvent extends GameEvent {
+class BallEvent extends MatchEvent {
   BallEvent() : super();
   int runs;
   Out out;
@@ -64,12 +64,12 @@ class BallEvent extends GameEvent {
   Player bowler;
   Player outPlayer;
   @override
-  void process(Game game) {
+  void process(Match match) {
     // TODO: implement process
   }
 
   @override
-  void undo(Game game) {
+  void undo(Match match) {
     // TODO: implement undo
   }
 }

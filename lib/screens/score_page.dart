@@ -1,5 +1,6 @@
-import 'package:cricket_scorer/game/game.dart';
+import 'package:cricket_scorer/match/match.dart';
 import 'package:cricket_scorer/scoresheet/scoresheet.dart';
+import 'package:cricket_scorer/screens/scorecard.dart';
 import 'package:cricket_scorer/widgets/batter_summary.dart';
 import 'package:cricket_scorer/widgets/bowler_summary.dart';
 import 'package:cricket_scorer/widgets/scoreboard.dart';
@@ -32,7 +33,7 @@ class ScorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var game = Provider.of<Game>(context, listen: false);
+    var match = Provider.of<Match>(context, listen: false);
     var scoresheet = Provider.of<Scoresheet>(context, listen: true);
     print('rebuild scorepage');
     return Scaffold(
@@ -46,34 +47,40 @@ class ScorePage extends StatelessWidget {
         // in the middle of the parent.
         child: Column(children: [
           scoreboard(scoresheet, context),
-          Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    '${game.battingTeam.name} - Batting',
-                    style: Theme.of(context).textTheme.headline,
-                  ),
-                ]),
-                batterSummary(scoresheet.currentBatter1, true),
-                batterSummary(scoresheet.currentBatter2, false),
-              ],
+          InkWell(
+            onTap: () => Navigator.pushNamed(context, Scorecard.routeName),
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text(
+                      '${match.battingTeam.name} - Batting',
+                      style: Theme.of(context).textTheme.headline,
+                    ),
+                  ]),
+                  batterSummary(scoresheet.currentBatter1, true),
+                  batterSummary(scoresheet.currentBatter2, false),
+                ],
+              ),
             ),
           ),
-          Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    '${game.bowlingTeam.name} - Bowling',
-                    style: Theme.of(context).textTheme.headline,
-                  ),
-                ]),
-                bowlerSummary(scoresheet.currentBowler1, true),
-                bowlerSummary(scoresheet.currentBowler2, false),
-              ],
+          InkWell(
+            onTap: () => Navigator.pushNamed(context, Scorecard.routeName),
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text(
+                      '${match.bowlingTeam.name} - Bowling',
+                      style: Theme.of(context).textTheme.headline,
+                    ),
+                  ]),
+                  bowlerSummary(scoresheet.currentBowler1, true),
+                  bowlerSummary(scoresheet.currentBowler2, false),
+                ],
+              ),
             ),
           ),
           Container(
@@ -115,7 +122,7 @@ class ScorePage extends StatelessWidget {
             RaisedButton(
               child: Text('Select player'),
               onPressed: () {
-                showPlayerPicker(context, game);
+                showPlayerPicker(context, match);
               },
             ),
           ]),
@@ -146,10 +153,10 @@ class ScorePage extends StatelessWidget {
     );
   }
 
-  showPlayerPicker(BuildContext context, Game game) {
+  showPlayerPicker(BuildContext context, Match match) {
     Picker(
         adapter: PickerDataAdapter<String>(
-            pickerdata: game.battingTeam.players.map((f) => f.name).toList()),
+            pickerdata: match.battingTeam.players.map((f) => f.name).toList()),
         changeToFirst: true,
         hideHeader: true,
         title: Text("Select player"),

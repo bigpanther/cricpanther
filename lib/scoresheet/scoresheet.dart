@@ -1,7 +1,7 @@
-import 'package:cricket_scorer/game/delivery.dart';
-import 'package:cricket_scorer/game/overs.dart';
-import 'package:cricket_scorer/game/player.dart';
-import 'package:cricket_scorer/game/player_picker.dart';
+import 'package:cricket_scorer/match/delivery.dart';
+import 'package:cricket_scorer/match/overs.dart';
+import 'package:cricket_scorer/match/player.dart';
+import 'package:cricket_scorer/match/player_picker.dart';
 import 'package:flutter/material.dart';
 
 class Scoresheet with ChangeNotifier {

@@ -1,4 +1,4 @@
-import 'package:cricket_scorer/game/overs.dart';
+import 'package:cricket_scorer/match/overs.dart';
 
 import 'enums/handedness.dart';
 import 'package:uuid/uuid.dart';
