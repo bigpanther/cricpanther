@@ -30,86 +30,94 @@ class ScorePage extends StatelessWidget {
         // the App.build method, and use it to set our appbar title.
         title: Text(this.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(children: [
-          scoreboard(scoresheet, context),
-          InkWell(
-            onTap: () => Navigator.pushNamed(context, Scorecard.routeName),
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Text(
-                      '${match.battingTeam.name} - Batting',
-                      style: Theme.of(context).textTheme.headline,
-                    ),
-                  ]),
-                  batterSummary(scoresheet.currentBatter1, true),
-                  batterSummary(scoresheet.currentBatter2, false),
-                ],
+      body: SingleChildScrollView(
+        child: Center(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: Column(children: [
+            scoreboard(scoresheet, context),
+            InkWell(
+              onTap: () => Navigator.pushNamed(context, Scorecard.routeName),
+              child: Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                        '${match.battingTeam.name} - Batting',
+                        style: Theme.of(context).textTheme.headline,
+                      ),
+                    ]),
+                    batterSummary(scoresheet.currentBatter1, true),
+                    batterSummary(scoresheet.currentBatter2, false),
+                  ],
+                ),
               ),
             ),
-          ),
-          InkWell(
-            onTap: () => Navigator.pushNamed(context, Scorecard.routeName),
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Text(
-                      '${match.bowlingTeam.name} - Bowling',
-                      style: Theme.of(context).textTheme.headline,
-                    ),
-                  ]),
-                  bowlerSummary(scoresheet.currentBowler1, true),
-                  bowlerSummary(scoresheet.currentBowler2, false),
-                ],
+            InkWell(
+              onTap: () => Navigator.pushNamed(context, Scorecard.routeName),
+              child: Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                        '${match.bowlingTeam.name} - Bowling',
+                        style: Theme.of(context).textTheme.headline,
+                      ),
+                    ]),
+                    bowlerSummary(scoresheet.currentBowler1, true),
+                    bowlerSummary(scoresheet.currentBowler2, false),
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            height: 50,
-            child: ListView.separated(
-              shrinkWrap: false,
-              padding: EdgeInsets.only(right: 20),
-              scrollDirection: Axis.horizontal,
-              itemCount: scoresheet.currentBalls,
-              separatorBuilder: (context, index) => buildDivider(index + 1),
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.only(top: 3, bottom: 3),
-                  width: 55,
-                  child: Center(
-                    child: Text(
-                      runs[index].toString(),
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                  ),
-                  decoration:
-                      BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-                );
-              },
-            ),
-            //shrinkWrap: true,
-          ),
-          Row(
-            children: <Widget>[
-              FloatingActionButton(
-                heroTag: 'pl',
-                shape: CircleBorder(side: BorderSide.none),
-                onPressed: () {
-                  showPlayerPicker(context, match);
+            Container(
+              height: 50,
+              child: ListView.separated(
+                shrinkWrap: false,
+                padding: EdgeInsets.only(right: 20),
+                scrollDirection: Axis.horizontal,
+                itemCount: scoresheet.lastSevenDeliveries.length,
+                separatorBuilder: (context, index) =>
+                    buildDivider(scoresheet, index + 1),
+                itemBuilder: (context, index) {
+                  if (scoresheet.lastSevenDeliveries[index] != '|') {
+                    return Container(
+                      margin: EdgeInsets.only(top: 3, bottom: 3),
+                      width: 55,
+                      child: Center(
+                        child: Text(
+                          scoresheet.lastSevenDeliveries[index],
+                          style: Theme.of(context).textTheme.body1,
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.red, shape: BoxShape.circle),
+                    );
+                  }
+                  return Container(
+                    height: 0,
+                    width: 0,
+                  );
                 },
-                child: Text('Pick'),
               ),
-            ],
-          ),
-          scoringRow(scoresheet, context, match),
-        ]),
+            ),
+            // Row(
+            //   children: <Widget>[
+            //     FloatingActionButton(
+            //       heroTag: 'pl',
+            //       shape: CircleBorder(side: BorderSide.none),
+            //       onPressed: () {
+            //         showPlayerPicker(context, match);
+            //       },
+            //       child: Text('Pick'),
+            //     ),
+            //   ],
+            // ),
+            scoringRow(scoresheet, context, match),
+          ]),
+        ),
       ),
     );
   }
@@ -216,8 +224,8 @@ class ScorePage extends StatelessWidget {
     );
   }
 
-  Widget buildDivider(int index) {
-    if (index % 6 == 0) {
+  Widget buildDivider(Scoresheet scoresheet, int index) {
+    if (scoresheet.lastSevenDeliveries[index] == '|') {
       return new Container(
         height: 30.0,
         width: 1.0,
@@ -225,6 +233,7 @@ class ScorePage extends StatelessWidget {
         margin: const EdgeInsets.only(left: 10.0, right: 10.0),
       );
     }
+    // if (index % 6 == 0) {}
     return Container(
       height: 0,
       width: 0,

@@ -24,6 +24,8 @@ class Scoresheet with ChangeNotifier {
   final PlayerPicker ballPicker;
   final PlayerPicker batPicker;
 
+  var lastSevenDeliveries = List<String>();
+
   Scoresheet(
     this.ballPicker,
     this.batPicker,
@@ -148,8 +150,13 @@ class Scoresheet with ChangeNotifier {
         !delivery.isPenalty()) {
       changeStrike();
     }
+    lastSevenDeliveries.add(delivery.shortSummary());
     if (Over.finished(this.currentBalls)) {
+      lastSevenDeliveries.add('|');
       _concludeOver();
+    }
+    while (lastSevenDeliveries.length > 7) {
+      lastSevenDeliveries.removeAt(0);
     }
     delivery.reset();
     notifyListeners();
