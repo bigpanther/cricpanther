@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'player.dart';
 
 class Team {
@@ -5,6 +7,11 @@ class Team {
   Player captain;
   Player viceCaptain;
   Player wicketKeeper;
+  Player substitute;
+  var isBatting = false;
+  List<Player> players;
+  HashMap<String, Player> playerMap;
+  bool get isBowling => !isBatting;
 
   Team(this.name) : assert(name.trim().length != 0) {
     players = List(12);
@@ -15,9 +22,13 @@ class Team {
     captain = players[0];
     viceCaptain = players[1];
     wicketKeeper = players[2];
+    wicketKeeper.isWicketKeeper = true;
+    substitute = players[11];
+    substitute.isSubstitute = true;
   }
-
-  var isBatting = false;
-  List<Player> players;
-  bool get isBowling => !isBatting;
+  swapWicketKeeper(Player p) {
+    wicketKeeper.isWicketKeeper = false;
+    wicketKeeper = p;
+    wicketKeeper.isWicketKeeper = true;
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:cricket_scorer/utils/uuid.dart';
 import 'package:flutter/material.dart';
 
 import 'team.dart';
@@ -6,17 +7,18 @@ import 'enums/extra.dart';
 import 'enums/out.dart';
 
 class Match with ChangeNotifier {
-  int target = 0;
+  static const defaultHomeTeamName = "Home Team";
+  static const defaultAwayTeamName = "Away Team";
+  String id = UUID.uuid();
+  String playground;
   int totalOvers = 0;
-  Team homeTeam;
-  Team awayTeam;
+  final Team homeTeam = Team(defaultHomeTeamName);
+  final Team awayTeam = Team(defaultAwayTeamName);
   Team tossTeam;
   Team battingTeam;
+  int target = 0;
   List<EventProcessor> matchEventsLog;
-  Match(String homeTeamName, awayTeamName) {
-    homeTeam = Team(homeTeamName);
-    awayTeam = Team(awayTeamName);
-  }
+
   Team get bowlingTeam {
     if (homeTeam.isBatting) return awayTeam;
     return homeTeam;
@@ -27,7 +29,6 @@ class Match with ChangeNotifier {
     this.battingTeam = batting;
     this.battingTeam.isBatting = true;
     this.bowlingTeam.isBatting = false;
-    notifyListeners();
   }
 }
 

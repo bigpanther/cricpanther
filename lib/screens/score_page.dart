@@ -1,3 +1,6 @@
+import 'package:cricket_scorer/match/delivery.dart';
+import 'package:cricket_scorer/match/enums/extra.dart';
+import 'package:cricket_scorer/match/enums/out.dart';
 import 'package:cricket_scorer/match/match.dart';
 import 'package:cricket_scorer/scoresheet/scoresheet.dart';
 import 'package:cricket_scorer/screens/scorecard.dart';
@@ -15,21 +18,6 @@ class ScorePage extends StatelessWidget {
   ScorePage({Key key, this.title}) : super(key: key);
 
   final runs = List<int>.generate(300, (i) => i % 6);
-
-  List<Widget> _scoringButtons(Scoresheet scoresheet) {
-    List<Widget> runButtons = List(6);
-    for (var i = 0; i < 6; i++) {
-      runButtons[i] = FloatingActionButton(
-        heroTag: 'h$i',
-        shape: CircleBorder(side: BorderSide.none),
-        onPressed: () {
-          scoresheet.addRuns(i + 1);
-        },
-        child: Text((i + 1).toString()),
-      );
-    }
-    return runButtons;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,32 +97,122 @@ class ScorePage extends StatelessWidget {
             //shrinkWrap: true,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: _scoringButtons(scoresheet),
+            children: <Widget>[
+              FloatingActionButton(
+                heroTag: 'pl',
+                shape: CircleBorder(side: BorderSide.none),
+                onPressed: () {
+                  showPlayerPicker(context, match);
+                },
+                child: Text('Pick'),
+              ),
+            ],
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            FloatingActionButton(
-              heroTag: 'wkt',
-              shape: CircleBorder(side: BorderSide.none),
-              onPressed: scoresheet.addWicket,
-              child: Text('W+'),
-            ),
-            RaisedButton(
-              child: Text('Select player'),
-              onPressed: () {
-                showPlayerPicker(context, match);
-              },
-            ),
-          ]),
+          scoringRow(scoresheet, context, match),
         ]),
       ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: "main",
-        child: Icon(Icons.add),
-        onPressed: scoresheet.addBall,
+    );
+  }
+
+  Widget scoringRow(Scoresheet scoresheet, BuildContext context, Match match) {
+    return ChangeNotifierProvider<Delivery>(
+      child: Consumer<Delivery>(
+        builder: (context, delivery, child) {
+          print('${delivery.runs}');
+          print('${delivery.extras}');
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(24.0, 4.0, 24.0, 4.0),
+            child: Column(
+              children: <Widget>[
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 3, bottom: 3),
+                    width: 55,
+                    height: 55,
+                    child: Center(
+                      child: Text(
+                        delivery.shortSummary(),
+                        style: Theme.of(context).textTheme.body2,
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.red, shape: BoxShape.circle),
+                  )
+                ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FloatingActionButton(
+                        heroTag: 'penalty',
+                        shape: CircleBorder(side: BorderSide.none),
+                        onPressed: () => delivery.addExtra(Extra.penalty),
+                        child: Text('Pen.'),
+                      ),
+                      FloatingActionButton(
+                        heroTag: 'byes',
+                        shape: CircleBorder(side: BorderSide.none),
+                        onPressed: () => delivery.addExtra(Extra.bye),
+                        child: Text('Bye'),
+                      ),
+                      FloatingActionButton(
+                        heroTag: 'lbs',
+                        shape: CircleBorder(side: BorderSide.none),
+                        onPressed: () => delivery.addExtra(Extra.legBye),
+                        child: Text('LB'),
+                      ),
+                      FloatingActionButton(
+                        heroTag: 'bonus',
+                        shape: CircleBorder(side: BorderSide.none),
+                        onPressed: () => delivery.addExtra(Extra.bonus),
+                        child: Text('Bonus'),
+                      ),
+                    ]),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FloatingActionButton(
+                          heroTag: 'wkt',
+                          shape: CircleBorder(side: BorderSide.none),
+                          onPressed: () => delivery.addOut(Out.bowled),
+                          child: Text('Wkt'),
+                        ),
+                        FloatingActionButton(
+                          heroTag: 'wides',
+                          shape: CircleBorder(side: BorderSide.none),
+                          onPressed: () => delivery.addExtra(Extra.wide),
+                          child: Text('Wide'),
+                        ),
+                        FloatingActionButton(
+                          heroTag: 'runs',
+                          shape: CircleBorder(side: BorderSide.none),
+                          onPressed: () => delivery.addRuns(1),
+                          child: Text('Runs'),
+                        ),
+                        FloatingActionButton(
+                          heroTag: 'noBalls',
+                          shape: CircleBorder(side: BorderSide.none),
+                          onPressed: () => delivery.addExtra(Extra.noBall),
+                          child: Text('NB'),
+                        ),
+                      ]),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton(
+                      child: Text('Add'),
+                      onPressed: () => scoresheet.recordDelivery(delivery),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation
-          .centerFloat, // This trailing comma makes auto-formatting nicer for build methods.
+      create: (BuildContext context) => new Delivery(),
     );
   }
 
