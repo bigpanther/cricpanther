@@ -66,6 +66,9 @@ class Delivery with ChangeNotifier {
 
   addOut(Out out) {
     this.out = out;
+  }
+
+  finshAddOut() {
     notifyListeners();
   }
 
@@ -104,5 +107,10 @@ class Delivery with ChangeNotifier {
 
   bool isBonus() {
     return extras.contains(Extra.bonus);
+  }
+
+  @override
+  String toString() {
+    return '$out $runs $bowler,$batter,$fielder  $extras';
   }
 }

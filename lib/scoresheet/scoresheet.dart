@@ -36,11 +36,6 @@ class Scoresheet with ChangeNotifier {
     this.currentBowler2 = ballPicker.next();
   }
 
-  // addRuns(int runs) {
-  //   _addRuns(runs);
-  //   notifyListeners();
-  // }
-
   void _addRuns(Delivery delivery) {
     isCurrentMaiden = false;
     if (delivery.extras[0] == Extra.none) {
@@ -86,25 +81,24 @@ class Scoresheet with ChangeNotifier {
     this.currentBatter1.runsScored += runs;
   }
 
-  // addWicket() {
-  //   _addWicket();
-  //   notifyListeners();
-  // }
-
-  void _addWicket() {
-    this.currentBowler1.wicketsTaken++;
+  void _addWicket(Delivery delivery) {
+    if (delivery.out == Out.none) return;
+    if (delivery.out.isBowlersWicket()) {
+      this.currentBowler1.wicketsTaken++;
+    }
     this.currentWickets++;
-    this.currentBatter1 = batPicker.next();
+    if (delivery.batter == this.currentBatter1) {
+      this.currentBatter1.out = delivery.out;
+      this.currentBatter1 = batPicker.next();
+    } else {
+      this.currentBatter2.out = delivery.out;
+      this.currentBatter2 = batPicker.next();
+    }
   }
 
   void _addRunsAgainstBowler(int runs) {
     this.currentBowler1.runsConceded += runs;
   }
-
-  // addBall() {
-  //   _incrementBalls();
-  //   notifyListeners();
-  // }
 
   void _incrementBalls(Delivery delivery) {
     if (Extras.isLegitBall(delivery.extras)) {
@@ -140,11 +134,9 @@ class Scoresheet with ChangeNotifier {
   }
 
   recordDelivery(Delivery delivery) {
-    //delivery.addBatter(this.currentBatter1);
-    //delivery.addBowler(this.currentBowler1);
     _addRuns(delivery);
     _incrementBalls(delivery);
-    if (delivery.out != Out.none) _addWicket();
+    _addWicket(delivery);
     if (delivery.runs % 2 == 1 &&
         !delivery.isBonus() &&
         !delivery.isPenalty()) {
@@ -159,6 +151,7 @@ class Scoresheet with ChangeNotifier {
       lastSevenDeliveries.removeAt(0);
     }
     delivery.reset();
+
     notifyListeners();
   }
 

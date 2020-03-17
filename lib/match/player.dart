@@ -25,4 +25,8 @@ class Player {
   Player(this.name) {
     this.id = UUID.uuid();
   }
+  @override
+  String toString() {
+    return name;
+  }
 }

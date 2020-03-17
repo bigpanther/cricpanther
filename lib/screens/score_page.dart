@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:cricket_scorer/match/delivery.dart';
 import 'package:cricket_scorer/match/enums/extra.dart';
 import 'package:cricket_scorer/match/enums/out.dart';
 import 'package:cricket_scorer/match/match.dart';
+import 'package:cricket_scorer/match/player.dart';
+import 'package:cricket_scorer/match/team.dart';
 import 'package:cricket_scorer/scoresheet/scoresheet.dart';
 import 'package:cricket_scorer/screens/scorecard.dart';
 import 'package:cricket_scorer/widgets/batter_summary.dart';
 import 'package:cricket_scorer/widgets/bowler_summary.dart';
+import 'package:cricket_scorer/widgets/player_picker.dart';
 import 'package:cricket_scorer/widgets/scoreboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -183,7 +188,8 @@ class ScorePage extends StatelessWidget {
                         FloatingActionButton(
                           heroTag: 'wkt',
                           shape: CircleBorder(side: BorderSide.none),
-                          onPressed: () => delivery.addOut(Out.bowled),
+                          onPressed: () => showOutPicker(
+                              context, match, scoresheet, delivery),
                           child: Text('Wkt'),
                         ),
                         FloatingActionButton(
@@ -240,17 +246,47 @@ class ScorePage extends StatelessWidget {
     );
   }
 
-  showPlayerPicker(BuildContext context, Match match) {
-    Picker(
-        adapter: PickerDataAdapter<String>(
-            pickerdata: match.battingTeam.players.map((f) => f.name).toList()),
-        changeToFirst: true,
-        hideHeader: true,
-        title: Text("Select player"),
-        selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
-        onConfirm: (Picker picker, List value) {
-          print(value.toString());
-          print(picker.adapter.text);
-        }).showDialog(context); //_scaffoldKey.currentState);
+  showOutPicker(BuildContext context, Match match, Scoresheet scoresheet,
+      Delivery delivery) async {
+    delivery.out = await () {
+      var c = new Completer<Out>();
+      Picker(
+          adapter: PickerDataAdapter<Out>(pickerdata: OutExtension.all()),
+          changeToFirst: true,
+          hideHeader: true,
+          title: Text("Select Out type"),
+          selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
+          onCancel: c.complete,
+          onConfirm: (Picker picker, List value) {
+            Out out = picker.adapter.getSelectedValues()[0];
+            c.complete(out);
+          }).showDialog(context);
+      return c.future;
+    }();
+    if (delivery.out.requiresBatter()) {
+      delivery.batter = await showPlayerPicker(
+        context,
+        [scoresheet.currentBatter1, scoresheet.currentBatter2],
+        "Select batter",
+      );
+      if (delivery.batter == null) {
+        delivery.out = Out.none;
+      }
+    }
+    if (delivery.out.requiresFielder()) {
+      delivery.fielder = await showPlayerPicker(
+        context,
+        match.bowlingTeam.players,
+        "Select fielder",
+      );
+      if (delivery.fielder == null) {
+        delivery.out = Out.none;
+        delivery.batter = null;
+      }
+    }
+    print(delivery);
+    if (delivery.out != Out.none) {
+      delivery.finshAddOut();
+    }
   }
 }
