@@ -87,6 +87,11 @@ class Scoresheet with ChangeNotifier {
       this.currentBowler1.wicketsTaken++;
     }
     this.currentWickets++;
+    if (delivery.batter == null) {
+      this.currentBatter1.out = delivery.out;
+      this.currentBatter1 = batPicker.next();
+      return;
+    }
     if (delivery.batter == this.currentBatter1) {
       this.currentBatter1.out = delivery.out;
       this.currentBatter1 = batPicker.next();
