@@ -21,6 +21,7 @@ class Scoresheet with ChangeNotifier {
   Player currentBatter1;
   Player currentBatter2;
   var isCurrentMaiden = true;
+  var isOverInProgress = false;
   final PlayerPicker ballPicker;
   final PlayerPicker batPicker;
 
@@ -107,6 +108,7 @@ class Scoresheet with ChangeNotifier {
 
   void _incrementBalls(Delivery delivery) {
     if (Extras.isLegitBall(delivery.extras)) {
+      isOverInProgress = true;
       this.currentBalls++;
       this.currentBatter1.ballsFaced++;
       this.currentBowler1.ballsBowled++;
@@ -123,6 +125,7 @@ class Scoresheet with ChangeNotifier {
     changeStrike();
     changeBowler();
     isCurrentMaiden = true;
+    isOverInProgress = false;
   }
 
   changeStrike() {
@@ -148,7 +151,7 @@ class Scoresheet with ChangeNotifier {
       changeStrike();
     }
     lastSevenDeliveries.add(delivery.shortSummary());
-    if (Over.finished(this.currentBalls)) {
+    if (Over.finished(this.currentBalls) && isOverInProgress) {
       lastSevenDeliveries.add('|');
       _concludeOver();
     }
