@@ -4,8 +4,6 @@ import 'package:cricket_scorer/match/delivery.dart';
 import 'package:cricket_scorer/match/enums/extra.dart';
 import 'package:cricket_scorer/match/enums/out.dart';
 import 'package:cricket_scorer/match/match.dart';
-import 'package:cricket_scorer/match/player.dart';
-import 'package:cricket_scorer/match/team.dart';
 import 'package:cricket_scorer/scoresheet/scoresheet.dart';
 import 'package:cricket_scorer/screens/scorecard.dart';
 import 'package:cricket_scorer/widgets/batter_summary.dart';
@@ -51,6 +49,11 @@ class ScorePage extends StatelessWidget {
                       Text(
                         '${match.battingTeam.name} - Batting',
                         style: Theme.of(context).textTheme.headline,
+                      ),
+                      IconButton(
+                        onPressed: scoresheet.changeStrike,
+                        tooltip: 'Change Strike',
+                        icon: Icon(Icons.compare_arrows),
                       ),
                     ]),
                     batterSummary(scoresheet.currentBatter1, true),

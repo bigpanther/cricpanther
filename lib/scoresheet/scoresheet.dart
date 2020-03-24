@@ -7,6 +7,7 @@ import 'package:cricket_scorer/match/player_picker.dart';
 import 'package:flutter/material.dart';
 
 class Scoresheet with ChangeNotifier {
+  int target = 0;
   int currentRuns = 0;
   int currentWickets = 0;
   int currentBalls = 0;
@@ -122,20 +123,25 @@ class Scoresheet with ChangeNotifier {
     if (isCurrentMaiden) {
       currentBowler1.maidensBowled++;
     }
-    changeStrike();
-    changeBowler();
+    _changeStrike();
+    _changeBowler();
     isCurrentMaiden = true;
     isOverInProgress = false;
   }
 
-  changeStrike() {
+  _changeStrike() {
     var t = currentBatter1;
     currentBatter1 = currentBatter2;
     currentBatter2 = t;
     t = currentBowler1;
   }
 
-  changeBowler() {
+  changeStrike() {
+    _changeStrike();
+    notifyListeners();
+  }
+
+  _changeBowler() {
     var t = currentBowler1;
     currentBowler1 = currentBowler2;
     currentBowler2 = t;
@@ -148,7 +154,7 @@ class Scoresheet with ChangeNotifier {
     if (delivery.runs % 2 == 1 &&
         !delivery.isBonus() &&
         !delivery.isPenalty()) {
-      changeStrike();
+      _changeStrike();
     }
     lastSevenDeliveries.add(delivery.shortSummary());
     if (Over.finished(this.currentBalls) && isOverInProgress) {

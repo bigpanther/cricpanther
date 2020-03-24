@@ -19,6 +19,9 @@ class MatchCreateState extends State<MatchCreate> {
   String homeTeamName;
   String awayTeamName;
   int totalOvers;
+  int maxPlayers;
+  bool isSecondInnings = false;
+  int target = 0;
   @override
   Widget build(BuildContext context) {
     var match = Provider.of<Match>(context, listen: false);
@@ -39,6 +42,7 @@ class MatchCreateState extends State<MatchCreate> {
                   TextFormField(
                     maxLength: 30,
                     autocorrect: false,
+                    initialValue: Match.defaultHomeTeamName,
                     maxLengthEnforced: true,
                     decoration: InputDecoration(
                       hintText: '${match.homeTeam.name} name',
@@ -53,6 +57,7 @@ class MatchCreateState extends State<MatchCreate> {
                   TextFormField(
                     maxLength: 30,
                     autocorrect: false,
+                    initialValue: Match.defaultAwayTeamName,
                     maxLengthEnforced: true,
                     decoration: InputDecoration(
                       hintText: '${match.awayTeam.name} name',
@@ -88,28 +93,68 @@ class MatchCreateState extends State<MatchCreate> {
                     onSaved: (val) =>
                         setState(() => totalOvers = int.parse(val)),
                   ),
-                  DropdownButton<int>(
-                    value: totalOvers,
-                    icon: Icon(Icons.arrow_downward),
-                    iconSize: 24,
-                    elevation: 16,
-                    style: TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
+                  TextFormField(
+                    maxLength: 2,
+                    initialValue: '11',
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      WhitelistingTextInputFormatter.digitsOnly
+                    ],
+                    autocorrect: false,
+                    maxLengthEnforced: true,
+                    decoration: InputDecoration(
+                      hintText: '11',
+                      labelText: 'Number of players per team',
+                      counterText: '',
                     ),
-                    onChanged: (int newValue) {
-                      setState(() {
-                        totalOvers = newValue;
-                      });
+                    validator: (value) {
+                      var val = int.parse(value);
+                      if (val <= 1 || val > 11) {
+                        return "Please enter a value between 2 and 11";
+                      }
+                      return null;
                     },
-                    items: <int>[20, 45, 50]
-                        .map<DropdownMenuItem<int>>((int value) {
-                      return DropdownMenuItem<int>(
-                        value: value,
-                        child: Text(value.toString()),
-                      );
-                    }).toList(),
+                    onSaved: (val) =>
+                        setState(() => maxPlayers = int.parse(val)),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text("Record second innings only"),
+                      Switch.adaptive(
+                        onChanged: (bool value) {
+                          setState(() {
+                            isSecondInnings = value;
+                          });
+                        },
+                        value: isSecondInnings,
+                      ),
+                    ],
+                  ),
+                  TextFormField(
+                    maxLength: 3,
+                    initialValue: '0',
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      WhitelistingTextInputFormatter.digitsOnly
+                    ],
+                    readOnly: !isSecondInnings,
+                    autocorrect: false,
+                    maxLengthEnforced: true,
+                    decoration: InputDecoration(
+                      hintText: '0',
+                      labelText:
+                          'Target (set when recording only the second innings)',
+                      counterText: '',
+                    ),
+                    validator: (value) {
+                      var val = int.parse(value);
+                      if (isSecondInnings && (val <= 0 || val > 999)) {
+                        return "Please enter a value between 1 and 1000";
+                      }
+                      return null;
+                    },
+                    onSaved: (val) => setState(() => target = int.parse(val)),
                   ),
                   RaisedButton(
                     onPressed: () {
@@ -118,7 +163,13 @@ class MatchCreateState extends State<MatchCreate> {
                         match.homeTeam.name = homeTeamName;
                         match.awayTeam.name = awayTeamName;
                         match.totalOvers = totalOvers;
-                        match.start(match.awayTeam, match.awayTeam);
+                        match.maxPlayers = maxPlayers;
+                        match.firstInnings = !isSecondInnings;
+                        if (isSecondInnings) {
+                          match.target = target;
+                        }
+                        match.start(
+                            toss: match.awayTeam, batting: match.awayTeam);
                         Navigator.pushReplacementNamed(
                             context, ScorePageBuilder.routeName);
                       }

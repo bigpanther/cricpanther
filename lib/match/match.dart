@@ -7,11 +7,18 @@ import 'enums/extra.dart';
 import 'enums/out.dart';
 
 class Match with ChangeNotifier {
-  static const defaultHomeTeamName = "Home Team";
-  static const defaultAwayTeamName = "Away Team";
+  bool firstInnings = true;
+  static const defaultHomeTeamName = "T1";
+  static const defaultAwayTeamName = "T2";
   String id = UUID.uuid();
   String playground;
-  int totalOvers = 0;
+  int _totalOvers = 0;
+  set totalOvers(val) => _totalOvers = val;
+  int get totalBalls => _totalOvers * 6;
+  set maxPlayers(val) => _maxPlayers = val;
+  int get maxPlayers => _maxPlayers;
+  int _maxPlayers = 11;
+  bool frozen = false;
   final Team homeTeam = Team(defaultHomeTeamName);
   final Team awayTeam = Team(defaultAwayTeamName);
   Team tossTeam;
@@ -24,11 +31,24 @@ class Match with ChangeNotifier {
     return homeTeam;
   }
 
-  void start(Team toss, batting) {
+  void start({@required Team toss, @required Team batting}) {
     this.tossTeam = toss;
     this.battingTeam = batting;
     this.battingTeam.isBatting = true;
     this.bowlingTeam.isBatting = false;
+  }
+
+  void endFirstInnings() {
+    firstInnings = false;
+    var currentBatting = this.battingTeam;
+    currentBatting.isBatting = false;
+    this.bowlingTeam.isBatting = true;
+    this.battingTeam = this.bowlingTeam;
+    this.battingTeam = currentBatting;
+  }
+
+  void end() {
+    frozen = true;
   }
 }
 
