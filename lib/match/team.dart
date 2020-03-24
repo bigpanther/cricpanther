@@ -17,7 +17,7 @@ class Team {
     players = List(12);
     for (var i = 0; i < players.length; i++) {
       var manIndex = i + 1;
-      players[i] = Player('Player $manIndex');
+      players[i] = Player('$name $manIndex');
     }
     captain = players[0];
     viceCaptain = players[1];

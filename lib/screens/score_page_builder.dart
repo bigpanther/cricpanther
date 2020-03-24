@@ -17,7 +17,7 @@ class ScorePageBuilder extends StatelessWidget {
           var match = Provider.of<Match>(context, listen: false);
           var batPicker = PlayerPicker(match.battingTeam.players);
           var ballPicker = PlayerPicker(match.bowlingTeam.players);
-          return Scoresheet(batPicker, ballPicker);
+          return Scoresheet(batPicker: batPicker, ballPicker: ballPicker);
         },
         child: ScorePage(title: this.title));
   }

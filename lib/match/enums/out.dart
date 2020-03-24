@@ -17,7 +17,7 @@ extension OutExtension on Out {
   String get text {
     switch (this) {
       case Out.none:
-        return '';
+        return 'NOT OUT';
         break;
       case Out.bowled:
         return 'Bowled';

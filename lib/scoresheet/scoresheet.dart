@@ -28,10 +28,10 @@ class Scoresheet with ChangeNotifier {
 
   var lastSevenDeliveries = List<String>();
 
-  Scoresheet(
-    this.ballPicker,
-    this.batPicker,
-  ) {
+  Scoresheet({
+    @required this.batPicker,
+    @required this.ballPicker,
+  }) {
     this.currentBatter1 = batPicker.next();
     this.currentBatter2 = batPicker.next();
     this.currentBowler1 = ballPicker.next();

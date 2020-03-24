@@ -19,6 +19,14 @@ class Player {
   var maidensBowled = 0;
   var wicketsTaken = 0;
   var out = Out.none;
+
+  var foursScored = 0;
+
+  var sixesScored = 0;
+
+  var wideBowled = 0;
+
+  var noBallsBowled = 0;
   //var fellOn = '';
   String get oversBowled => Over.overs(ballsBowled);
   bool get isOut => out != Out.none;

@@ -45,6 +45,7 @@ class Match with ChangeNotifier {
     this.bowlingTeam.isBatting = true;
     this.battingTeam = this.bowlingTeam;
     this.battingTeam = currentBatting;
+    notifyListeners();
   }
 
   void end() {
