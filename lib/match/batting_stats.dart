@@ -1,6 +1,12 @@
+import 'package:cricket_scorer/match/overs.dart';
+
 class BattingStats {
-  int runs;
-  int balls;
-  int fours;
-  int sixes;
+  int runs = 0;
+  int balls = 0;
+  int fours = 0;
+  int sixes = 0;
+  int fellOnScore = 0;
+  int fellOnBall = 0;
+
+  String get fellAtOver => Over.overs(fellOnBall);
 }

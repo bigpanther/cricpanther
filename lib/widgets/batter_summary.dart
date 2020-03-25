@@ -11,7 +11,7 @@ Widget batterSummary(Player player, bool onStrike) {
       '${player.name}$strikeText',
     ),
     Text(
-      '${player.runsScored}(${player.ballsFaced})',
+      '${player.battingStats.runs}(${player.battingStats.balls})',
     ),
   ]);
 }

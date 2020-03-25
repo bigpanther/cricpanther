@@ -1,5 +1,4 @@
 import 'package:cricket_scorer/match/match.dart';
-import 'package:cricket_scorer/match/overs.dart';
 import 'package:cricket_scorer/match/enums/out.dart';
 import 'package:cricket_scorer/match/team.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,7 +67,7 @@ class Scorecard extends StatelessWidget {
               ),
             ],
             rows: battingTeam.players
-                .where((t) => (t.ballsFaced > 0))
+                .where((t) => (t.battingStats.balls > 0))
                 .map<DataRow>(
                   (p) => DataRow(
                     cells: [
@@ -80,13 +79,13 @@ class Scorecard extends StatelessWidget {
                         Text('${p.out.text}'),
                       ),
                       DataCell(
-                        Text('${p.runsScored}(${p.ballsFaced})'),
+                        Text('${p.battingStats.runs}(${p.battingStats.balls})'),
                       ),
                       DataCell(
-                        Text('${p.foursScored}'),
+                        Text('${p.battingStats.fours}'),
                       ),
                       DataCell(
-                        Text('${p.sixesScored}'),
+                        Text('${p.battingStats.sixes}'),
                       ),
                     ],
                   ),
@@ -125,7 +124,7 @@ class Scorecard extends StatelessWidget {
               ),
             ],
             rows: bowlingTeam.players
-                .where((t) => (t.ballsBowled > 0))
+                .where((t) => (t.bowlingStats.balls > 0))
                 .map<DataRow>(
                   (p) => DataRow(
                     cells: [
@@ -134,22 +133,22 @@ class Scorecard extends StatelessWidget {
                         //showEditIcon: true,
                       ),
                       DataCell(
-                        Text('${Over.overs(p.ballsBowled)}'),
+                        Text('${p.bowlingStats.oversBowled}'),
                       ),
                       DataCell(
-                        Text('${p.maidensBowled}'),
+                        Text('${p.bowlingStats.maidens}'),
                       ),
                       DataCell(
-                        Text('${p.runsConceded}'),
+                        Text('${p.bowlingStats.runs}'),
                       ),
                       DataCell(
-                        Text('${p.wicketsTaken}'),
+                        Text('${p.bowlingStats.wickets}'),
                       ),
                       DataCell(
-                        Text('${p.wideBowled}'),
+                        Text('${p.bowlingStats.wides}'),
                       ),
                       DataCell(
-                        Text('${p.noBallsBowled}'),
+                        Text('${p.bowlingStats.noBalls}'),
                       ),
                     ],
                   ),

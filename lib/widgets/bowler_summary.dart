@@ -11,7 +11,7 @@ Widget bowlerSummary(Player bowler, bool onStrike) {
       '${bowler.name}$strikeText',
     ),
     Text(
-      '${bowler.oversBowled}-${bowler.maidensBowled}-${bowler.runsConceded}-${bowler.wicketsTaken}',
+      '${bowler.bowlingStats.oversBowled}-${bowler.bowlingStats.maidens}-${bowler.bowlingStats.runs}-${bowler.bowlingStats.wickets}',
     ),
   ]);
 }

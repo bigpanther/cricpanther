@@ -80,13 +80,13 @@ class Scoresheet with ChangeNotifier {
   }
 
   void _addRunsForBatter(int runs) {
-    this.currentBatter1.runsScored += runs;
+    this.currentBatter1.battingStats.runs += runs;
   }
 
   void _addWicket(Delivery delivery) {
     if (delivery.out == Out.none) return;
     if (delivery.out.isBowlersWicket()) {
-      this.currentBowler1.wicketsTaken++;
+      this.currentBowler1.bowlingStats.wickets++;
     }
     this.currentWickets++;
     if (delivery.batter == null) {
@@ -104,24 +104,24 @@ class Scoresheet with ChangeNotifier {
   }
 
   void _addRunsAgainstBowler(int runs) {
-    this.currentBowler1.runsConceded += runs;
+    this.currentBowler1.bowlingStats.runs += runs;
   }
 
   void _incrementBalls(Delivery delivery) {
     if (delivery.extras.isLegitBall()) {
       isOverInProgress = true;
       this.currentBalls++;
-      this.currentBatter1.ballsFaced++;
-      this.currentBowler1.ballsBowled++;
+      this.currentBatter1.battingStats.balls++;
+      this.currentBowler1.bowlingStats.balls++;
     }
     if (delivery.isNoBall()) {
-      this.currentBatter1.ballsFaced++;
+      this.currentBatter1.battingStats.balls++;
     }
   }
 
   _concludeOver() {
     if (isCurrentMaiden) {
-      currentBowler1.maidensBowled++;
+      currentBowler1.bowlingStats.maidens++;
     }
     _changeStrike();
     _changeBowler();

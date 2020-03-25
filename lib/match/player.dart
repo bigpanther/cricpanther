@@ -1,10 +1,13 @@
+import 'package:cricket_scorer/match/batting_stats.dart';
+import 'package:cricket_scorer/match/bowling_stats.dart';
 import 'package:cricket_scorer/match/enums/out.dart';
-import 'package:cricket_scorer/match/overs.dart';
 import 'package:cricket_scorer/utils/uuid.dart';
 
 import 'enums/handedness.dart';
 
 class Player {
+  BattingStats battingStats;
+  BowlingStats bowlingStats;
   String id;
   String name;
   String exid;
@@ -12,26 +15,15 @@ class Player {
   var isWicketKeeper = false;
   var batting = Handedness.right;
   var bowling = Handedness.right;
-  var runsScored = 0;
-  var ballsFaced = 0;
-  var ballsBowled = 0;
-  var runsConceded = 0;
-  var maidensBowled = 0;
-  var wicketsTaken = 0;
+
   var out = Out.none;
-
-  var foursScored = 0;
-
-  var sixesScored = 0;
-
-  var wideBowled = 0;
-
-  var noBallsBowled = 0;
   //var fellOn = '';
-  String get oversBowled => Over.overs(ballsBowled);
+
   bool get isOut => out != Out.none;
-  Player(this.name) {
+  Player(this.name) : assert(name.trim().length != 0) {
     this.id = UUID.uuid();
+    battingStats = BattingStats();
+    bowlingStats = BowlingStats();
   }
   @override
   String toString() {
