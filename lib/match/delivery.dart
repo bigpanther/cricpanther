@@ -47,7 +47,7 @@ class Delivery with ChangeNotifier {
       if (this.runs == 0 && e != Extra.wide && e != Extra.noBall) {
         this.runs = 1;
       }
-    } else if (!Extras.allowedWith(e, extras)) {
+    } else if (!e.allowedWith(extras)) {
       return;
     } else {
       extras.add(e);
@@ -83,7 +83,7 @@ class Delivery with ChangeNotifier {
     }
     var ext = '';
     if (extras[0] != Extra.none) {
-      ext = '${extras.map((e) => Extras.shortCode(e)).join('+')}';
+      ext = '${extras.map((e) => e.shortCode()).join('+')}';
     }
     var tail = [wicket, ext].where((t) => t != '').join('+');
     if (tail != '' && runs == 0) {

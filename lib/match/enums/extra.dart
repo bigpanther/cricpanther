@@ -8,7 +8,17 @@ enum Extra {
   bonus,
 }
 
-class Extras {
+extension ExtraListExtension on List<Extra> {
+  bool isLegitBall() {
+    if (this.length < 1 || this[0] == Extra.none) return true;
+    return !this.contains(Extra.wide) &&
+        !this.contains(Extra.noBall) &&
+        !this.contains(Extra.penalty) &&
+        !this.contains(Extra.bonus);
+  }
+}
+
+extension ExtraExtension on Extra {
   static List<Extra> all = [
     Extra.wide,
     Extra.noBall,
@@ -18,10 +28,10 @@ class Extras {
     Extra.bonus
   ];
 
-  static List<Extra> _eligibleExtras(Extra e) {
-    switch (e) {
+  List<Extra> _eligibleExtras() {
+    switch (this) {
       case Extra.none:
-        return Extras.all;
+        return all;
         break;
       case Extra.wide:
         return [];
@@ -45,28 +55,20 @@ class Extras {
     return [];
   }
 
-  static bool allowedWith(Extra extra, List<Extra> e) {
+  bool allowedWith(List<Extra> e) {
     if (e.length > 1) {
       return false;
     }
 
     var extraAlreadyPresent = e[0];
-    if (_eligibleExtras(extraAlreadyPresent).contains(extra)) {
+    if (extraAlreadyPresent._eligibleExtras().contains(this)) {
       return true;
     }
     return false;
   }
 
-  static bool isLegitBall(List<Extra> e) {
-    if (e.length < 1 || e[0] == Extra.none) return true;
-    return !e.contains(Extra.wide) &&
-        !e.contains(Extra.noBall) &&
-        !e.contains(Extra.penalty) &&
-        !e.contains(Extra.bonus);
-  }
-
-  static String shortCode(Extra e) {
-    switch (e) {
+  String shortCode() {
+    switch (this) {
       case Extra.none:
         return '';
         break;

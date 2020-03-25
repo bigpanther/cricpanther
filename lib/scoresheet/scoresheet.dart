@@ -108,7 +108,7 @@ class Scoresheet with ChangeNotifier {
   }
 
   void _incrementBalls(Delivery delivery) {
-    if (Extras.isLegitBall(delivery.extras)) {
+    if (delivery.extras.isLegitBall()) {
       isOverInProgress = true;
       this.currentBalls++;
       this.currentBatter1.ballsFaced++;
