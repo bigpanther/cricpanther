@@ -133,7 +133,6 @@ class Scoresheet with ChangeNotifier {
     var t = currentBatter1;
     currentBatter1 = currentBatter2;
     currentBatter2 = t;
-    t = currentBowler1;
   }
 
   changeStrike() {
@@ -145,6 +144,12 @@ class Scoresheet with ChangeNotifier {
     var t = currentBowler1;
     currentBowler1 = currentBowler2;
     currentBowler2 = t;
+  }
+
+  changeBowler(Player newBowler) {
+    currentBowler1 = newBowler;
+    print(currentBowler1);
+    notifyListeners();
   }
 
   recordDelivery(Delivery delivery) {

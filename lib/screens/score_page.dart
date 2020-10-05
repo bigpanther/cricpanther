@@ -73,6 +73,20 @@ class ScorePage extends StatelessWidget {
                         '${match.bowlingTeam.name} - Bowling',
                         style: Theme.of(context).textTheme.headline,
                       ),
+                      IconButton(
+                        onPressed: () async {
+                          var newBowler = await showPlayerPicker(
+                            context,
+                            match.bowlingTeam.players,
+                            "Select Bowler",
+                          );
+                          if (newBowler != null) {
+                            scoresheet.changeBowler(newBowler);
+                          }
+                        },
+                        tooltip: 'Change Bowler',
+                        icon: Icon(Icons.compare_arrows),
+                      ),
                     ]),
                     bowlerSummary(scoresheet.currentBowler1, true),
                     bowlerSummary(scoresheet.currentBowler2, false),

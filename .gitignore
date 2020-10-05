@@ -38,3 +38,4 @@ lib/generated_plugin_registrant.dart
 .vscode/
 android/.project
 android/.settings/
+ios/Flutter/.last_build_id
