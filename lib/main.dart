@@ -1,7 +1,7 @@
-import 'package:cricket_scorer/match/match.dart';
-import 'package:cricket_scorer/screens/match_create.dart';
-import 'package:cricket_scorer/screens/score_page_builder.dart';
-import 'package:cricket_scorer/screens/scorecard.dart';
+import 'package:cricpanther/match/match.dart';
+import 'package:cricpanther/screens/match_create.dart';
+import 'package:cricpanther/screens/score_page_builder.dart';
+import 'package:cricpanther/screens/scorecard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

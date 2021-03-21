@@ -1,5 +1,3 @@
-# A cricket scoring app written in flutter
+# cricpanther
 
-```bash
-flutter run
-```
+Score your cricket games

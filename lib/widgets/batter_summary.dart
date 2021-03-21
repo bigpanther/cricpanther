@@ -1,4 +1,4 @@
-import 'package:cricket_scorer/match/player.dart';
+import 'package:cricpanther/match/player.dart';
 import 'package:flutter/material.dart';
 
 Widget batterSummary(Player player, bool onStrike) {

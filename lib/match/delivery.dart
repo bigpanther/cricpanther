@@ -1,6 +1,6 @@
-import 'package:cricket_scorer/match/enums/extra.dart';
-import 'package:cricket_scorer/match/enums/out.dart';
-import 'package:cricket_scorer/match/player.dart';
+import 'package:cricpanther/match/enums/extra.dart';
+import 'package:cricpanther/match/enums/out.dart';
+import 'package:cricpanther/match/player.dart';
 import 'package:flutter/material.dart';
 
 class Delivery with ChangeNotifier {

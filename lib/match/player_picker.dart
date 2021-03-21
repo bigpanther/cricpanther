@@ -1,7 +1,7 @@
 import 'dart:collection';
 //import 'dart:math';
 
-import 'package:cricket_scorer/match/player.dart';
+import 'package:cricpanther/match/player.dart';
 
 class PlayerPicker {
   List<Player> players;

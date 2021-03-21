@@ -1,8 +1,8 @@
-import 'package:cricket_scorer/screens/score_page_builder.dart';
+import 'package:cricpanther/screens/score_page_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:cricket_scorer/match/match.dart';
-import 'package:cricket_scorer/match/team.dart';
-import 'package:cricket_scorer/match/player.dart';
+import 'package:cricpanther/match/match.dart';
+import 'package:cricpanther/match/team.dart';
+import 'package:cricpanther/match/player.dart';
 
 class MatchMeta extends StatefulWidget {
   static final routeName = "/matchMeta";

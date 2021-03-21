@@ -1,6 +1,6 @@
-import 'package:cricket_scorer/match/match.dart';
-import 'package:cricket_scorer/match/enums/out.dart';
-import 'package:cricket_scorer/match/team.dart';
+import 'package:cricpanther/match/match.dart';
+import 'package:cricpanther/match/enums/out.dart';
+import 'package:cricpanther/match/team.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

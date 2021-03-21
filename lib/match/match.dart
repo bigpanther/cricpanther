@@ -1,4 +1,4 @@
-import 'package:cricket_scorer/utils/uuid.dart';
+import 'package:cricpanther/utils/uuid.dart';
 import 'package:flutter/material.dart';
 
 import 'team.dart';

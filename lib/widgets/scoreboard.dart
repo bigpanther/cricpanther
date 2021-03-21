@@ -1,4 +1,4 @@
-import 'package:cricket_scorer/scoresheet/scoresheet.dart';
+import 'package:cricpanther/scoresheet/scoresheet.dart';
 import 'package:flutter/material.dart';
 
 Widget scoreboard(Scoresheet scoresheet, BuildContext context) {

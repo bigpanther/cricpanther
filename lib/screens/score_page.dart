@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:cricket_scorer/match/delivery.dart';
-import 'package:cricket_scorer/match/enums/extra.dart';
-import 'package:cricket_scorer/match/enums/out.dart';
-import 'package:cricket_scorer/match/match.dart';
-import 'package:cricket_scorer/scoresheet/scoresheet.dart';
-import 'package:cricket_scorer/screens/scorecard.dart';
-import 'package:cricket_scorer/widgets/batter_summary.dart';
-import 'package:cricket_scorer/widgets/bowler_summary.dart';
-import 'package:cricket_scorer/widgets/player_picker.dart';
-import 'package:cricket_scorer/widgets/scoreboard.dart';
+import 'package:cricpanther/match/delivery.dart';
+import 'package:cricpanther/match/enums/extra.dart';
+import 'package:cricpanther/match/enums/out.dart';
+import 'package:cricpanther/match/match.dart';
+import 'package:cricpanther/scoresheet/scoresheet.dart';
+import 'package:cricpanther/screens/scorecard.dart';
+import 'package:cricpanther/widgets/batter_summary.dart';
+import 'package:cricpanther/widgets/bowler_summary.dart';
+import 'package:cricpanther/widgets/player_picker.dart';
+import 'package:cricpanther/widgets/scoreboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';

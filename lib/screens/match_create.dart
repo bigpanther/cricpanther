@@ -1,5 +1,5 @@
-import 'package:cricket_scorer/match/match.dart';
-import 'package:cricket_scorer/screens/score_page_builder.dart';
+import 'package:cricpanther/match/match.dart';
+import 'package:cricpanther/screens/score_page_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

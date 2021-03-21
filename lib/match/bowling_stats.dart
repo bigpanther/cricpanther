@@ -1,4 +1,4 @@
-import 'package:cricket_scorer/match/overs.dart';
+import 'package:cricpanther/match/overs.dart';
 
 class BowlingStats {
   int runs = 0;

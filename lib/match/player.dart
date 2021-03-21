@@ -1,7 +1,7 @@
-import 'package:cricket_scorer/match/batting_stats.dart';
-import 'package:cricket_scorer/match/bowling_stats.dart';
-import 'package:cricket_scorer/match/enums/out.dart';
-import 'package:cricket_scorer/utils/uuid.dart';
+import 'package:cricpanther/match/batting_stats.dart';
+import 'package:cricpanther/match/bowling_stats.dart';
+import 'package:cricpanther/match/enums/out.dart';
+import 'package:cricpanther/utils/uuid.dart';
 
 import 'enums/handedness.dart';
 

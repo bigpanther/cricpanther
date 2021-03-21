@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:cricket_scorer/match/player.dart';
-import 'package:cricket_scorer/match/player_picker.dart';
+import 'package:cricpanther/match/player.dart';
+import 'package:cricpanther/match/player_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/Picker.dart';
 
