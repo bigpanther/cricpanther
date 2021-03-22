@@ -1,8 +1,10 @@
+import 'package:cricpanther/l10n/locales/l10n.dart';
 import 'package:cricpanther/match/match.dart';
 import 'package:cricpanther/screens/score_page_builder.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 class MatchCreate extends StatefulWidget {
@@ -183,10 +185,58 @@ class MatchCreateState extends State<MatchCreate> {
             ),
             RichText(
               text: TextSpan(
-                text: 'About Us',
+                text: CricpantherLocalizations.of(context).aboutUs,
+                style: Theme.of(context).textTheme.bodyText1,
                 recognizer: new TapGestureRecognizer()
-                  ..onTap = () {
-                    print('About us');
+                  ..onTap = () async {
+                    final packageInfo = await PackageInfo.fromPlatform();
+                    final appName = packageInfo.appName;
+                    final version = packageInfo.version;
+                    final themeData = Theme.of(context);
+                    final msgStyle = themeData.textTheme.bodyText1;
+                    final localization = CricpantherLocalizations.of(context);
+                    final linkStyle =
+                        msgStyle!.copyWith(color: themeData.primaryColor);
+                    showAboutDialog(
+                      context: context,
+                      // applicationIcon: const Image(
+                      //   image: AssetImage(
+                      //     'assets/images/cricpanther_logo.png',
+                      //   ),
+                      //   width: 48.0,
+                      //   height: 48.0,
+                      // ),
+                      applicationName: appName,
+                      applicationVersion: version,
+                      applicationLegalese: localization.applicationLegalese,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                  style: msgStyle,
+                                  text: localization.reachUsAt,
+                                ),
+                                TextSpan(
+                                  style: linkStyle,
+                                  text: ' info@bigpanther.ca',
+                                ),
+                                const TextSpan(
+                                  text: '\n',
+                                ),
+                                TextSpan(
+                                  style: themeData.textTheme.caption,
+                                  text: localization.madeWithLove,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
                   },
               ),
             ),
