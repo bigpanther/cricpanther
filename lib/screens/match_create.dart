@@ -1,5 +1,6 @@
 import 'package:cricpanther/match/match.dart';
 import 'package:cricpanther/screens/score_page_builder.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -178,6 +179,15 @@ class MatchCreateState extends State<MatchCreate> {
                     child: Text('Start match'),
                   ),
                 ]),
+              ),
+            ),
+            RichText(
+              text: TextSpan(
+                text: 'About Us',
+                recognizer: new TapGestureRecognizer()
+                  ..onTap = () {
+                    print('About us');
+                  },
               ),
             ),
           ],

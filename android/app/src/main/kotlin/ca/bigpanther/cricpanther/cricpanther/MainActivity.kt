@@ -1,4 +1,4 @@
-package ca.bigpanther.cricpanther.cricpanther
+package ca.bigpanther.cricpanther
 
 import io.flutter.embedding.android.FlutterActivity
 
