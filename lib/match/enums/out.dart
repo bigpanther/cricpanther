@@ -18,42 +18,29 @@ extension OutExtension on Out {
     switch (this) {
       case Out.none:
         return 'NOT OUT';
-        break;
       case Out.bowled:
         return 'Bowled';
-        break;
       case Out.caught:
         return 'Caught';
-        break;
       case Out.lbw:
         return 'LBW';
-        break;
       case Out.stumped:
         return 'Stumped';
-        break;
       case Out.runOut:
         return "Run out";
-        break;
       case Out.timeOut:
         return 'Time Out';
-        break;
       case Out.hitWicket:
         return 'Hit wicket';
-        break;
       case Out.obstruction:
         return 'Obstruction';
-        break;
       case Out.retired:
         return 'Retired';
-        break;
       case Out.hitTwice:
         return 'Hit twice';
-        break;
       case Out.mankad:
         return 'Mankad';
-        break;
     }
-    return '';
   }
 
   //Out get value => this;

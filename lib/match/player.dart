@@ -24,7 +24,7 @@ class Player {
       : this.id = UUID.uuid(),
         battingStats = BattingStats(),
         bowlingStats = BowlingStats(),
-        assert(name.trim().length != 0) {}
+        assert(name.trim().length != 0);
   @override
   String toString() {
     return name;

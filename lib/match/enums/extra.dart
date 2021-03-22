@@ -32,27 +32,19 @@ extension ExtraExtension on Extra {
     switch (this) {
       case Extra.none:
         return all;
-        break;
       case Extra.wide:
         return [];
-        break;
       case Extra.noBall:
         return [Extra.bye, Extra.legBye];
-        break;
       case Extra.bye:
         return [Extra.noBall];
-        break;
       case Extra.legBye:
         return [Extra.noBall];
-        break;
       case Extra.penalty:
         return [];
-        break;
       case Extra.bonus:
         return [];
-        break;
     }
-    return [];
   }
 
   bool allowedWith(List<Extra> e) {
@@ -71,26 +63,18 @@ extension ExtraExtension on Extra {
     switch (this) {
       case Extra.none:
         return '';
-        break;
       case Extra.wide:
         return 'wd';
-        break;
       case Extra.noBall:
         return 'nb';
-        break;
       case Extra.bye:
         return 'b';
-        break;
       case Extra.legBye:
         return 'lb';
-        break;
       case Extra.penalty:
         return 'P';
-        break;
       case Extra.bonus:
         return 'B';
-        break;
     }
-    return '';
   }
 }

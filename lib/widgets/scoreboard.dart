@@ -11,7 +11,7 @@ Widget scoreboard(Scoresheet scoresheet, BuildContext context) {
             children: <InlineSpan>[
               TextSpan(text: 'Target: ${scoresheet.target}'),
             ],
-            style: Theme.of(context).textTheme.body1,
+            style: Theme.of(context).textTheme.bodyText2,
           )),
         Text.rich(TextSpan(
           children: <InlineSpan>[
@@ -19,7 +19,7 @@ Widget scoreboard(Scoresheet scoresheet, BuildContext context) {
             TextSpan(text: '/'),
             TextSpan(text: scoresheet.currentWickets.toString()),
           ],
-          style: Theme.of(context).textTheme.display4,
+          style: Theme.of(context).textTheme.headline1,
         )),
         Text.rich(TextSpan(
           children: <InlineSpan>[
@@ -27,7 +27,7 @@ Widget scoreboard(Scoresheet scoresheet, BuildContext context) {
             TextSpan(text: scoresheet.overs()),
             TextSpan(text: ')'),
           ],
-          style: Theme.of(context).textTheme.display2,
+          style: Theme.of(context).textTheme.headline3,
         )),
       ]),
     ),

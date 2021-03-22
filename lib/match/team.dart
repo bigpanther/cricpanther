@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'player.dart';
 
 class Team {

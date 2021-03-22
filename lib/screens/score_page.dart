@@ -48,7 +48,7 @@ class ScorePage extends StatelessWidget {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         '${match.battingTeam!.name} - Batting',
-                        style: Theme.of(context).textTheme.headline,
+                        style: Theme.of(context).textTheme.headline5,
                       ),
                       IconButton(
                         onPressed: scoresheet.changeStrike,
@@ -111,7 +111,7 @@ class ScorePage extends StatelessWidget {
                       child: Center(
                         child: Text(
                           scoresheet.lastSevenDeliveries[index],
-                          style: Theme.of(context).textTheme.body1,
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -162,7 +162,7 @@ class ScorePage extends StatelessWidget {
                     child: Center(
                       child: Text(
                         delivery.shortSummary(),
-                        style: Theme.of(context).textTheme.body2,
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
                     decoration: BoxDecoration(
