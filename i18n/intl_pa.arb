@@ -1,0 +1,268 @@
+{
+  "@@locale": "pa",
+  "@@last_modified": "2020-11-17T22:52:51.683224",
+  "paramRequired": "{param} ਦੀ ਲੋੜ ਹੈ",
+  "@paramRequired": {
+    "description": "Param required",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Name"
+      }
+    }
+  },
+  "helloParam": "ਹੈਲੋ {param}",
+  "@helloParam": {
+    "description": "Hello param",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Username"
+      }
+    }
+  },
+  "editParam": "{param} ਨੂੰ ਸੰਪਾਦਿਤ ਕਰੋ",
+  "@editParam": {
+    "description": "Edit param",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Shipment"
+      }
+    }
+  },
+  "addNewParam": "ਨਵਾਂ {param} ਸ਼ਾਮਲ ਕਰੋ",
+  "@addNewParam": {
+    "description": "Add new param",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Shipment"
+      }
+    }
+  },
+  "selectParam": "{param} ਚੁਣੋ",
+  "@selectParam": {
+    "description": "Select param",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Shipment"
+      }
+    }
+  },
+  "createdAt": "ਤੇ ਬਣਾਇਆ ਗਿਆ",
+  "@createdAt": {
+    "description": "Created at ",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lastUpdate": "ਆਖਰੀ ਅਪਡੇਟ",
+  "@lastUpdate": {
+    "description": "Last update ",
+    "type": "text",
+    "placeholders": {}
+  },
+  "email": "ਈ-ਮੇਲ",
+  "@email": {
+    "description": "Email",
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "ਮੁੱਖ ਪੰਨਾ",
+  "@home": {
+    "description": "Home",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logout": "ਲਾੱਗ ਆਊਟ",
+  "@logout": {
+    "description": "Logout",
+    "type": "text",
+    "placeholders": {}
+  },
+  "signIn": "ਲਾੱਗ ਇਨ",
+  "@signIn": {
+    "description": "Sign In",
+    "type": "text",
+    "placeholders": {}
+  },
+  "register": "ਪੰਜੀਕਰਨ",
+  "@register": {
+    "description": "Register",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "ਸੈਟਿੰਗਜ਼",
+  "@settings": {
+    "description": "Settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutUs": "ਸਾਡੇ ਬਾਰੇ ਵਧੇਰੇ ਜਾਣਕਾਰੀ",
+  "@aboutUs": {
+    "description": "About Us",
+    "type": "text",
+    "placeholders": {}
+  },
+  "password": "ਪਾਸਵਰਡ",
+  "@password": {
+    "description": "Password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "name": "ਨਾਮ",
+  "@name": {
+    "description": "Name",
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcome": "ਕ੍ਰਿਕ ਪੈਂਥਰ ਤੁਹਾਡਾ ਸਵਾਗਤ ਕਰਦਾ ਹੈ",
+  "@welcome": {
+    "description": "Welcome to Cric Panther",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailSent": "{emailId} ਨੂੰ ਈਮੇਲ ਭੇਜੀ ਗਈ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਇਨਬਾਕਸ ਦੀ ਜਾਂਚ ਕਰੋ।",
+  "@emailSent": {
+    "description": "An Email has been sent",
+    "type": "text",
+    "placeholders": {
+      "emailId": {
+        "example": "info@bigpanther.ca"
+      }
+    }
+  },
+  "emailNotVerified": "ਇਹ ਈਮੇਲ ਆਈਡੀ ਅਜੇ ਪ੍ਰਮਾਣਿਤ ਨਹੀਂ ਹੈ. ਮੁੜ ਕੋਸ਼ਿਸ ਕਰੋ ਜੀ.",
+  "@emailNotVerified": {
+    "description": "This Email Id is not yet verified. Please try again.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "resetPassword": "ਪਾਸਵਰਡ ਰੀਸੈਟ ਕਰੋ",
+  "@resetPassword": {
+    "description": "Reset Password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "forgotPassword": "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?",
+  "@forgotPassword": {
+    "description": "Forgot Password?",
+    "type": "text",
+    "placeholders": {}
+  },
+  "resetPasswordMessage": "ਰੀਸੈਟ ਲਿੰਕ ਵਾਲੀ ਇੱਕ ਈਮੇਲ ਤੁਹਾਨੂੰ ਭੇਜੀ ਜਾਏਗੀ.",
+  "@resetPasswordMessage": {
+    "description": "Reset password message",
+    "type": "text",
+    "placeholders": {}
+  },
+  "profile": "ਪ੍ਰੋਫਾਈਲ",
+  "@profile": {
+    "description": "profile",
+    "type": "text",
+    "placeholders": {}
+  },
+  "save": "ਰੱਖਣਾ",
+  "@save": {
+    "description": "save",
+    "type": "text",
+    "placeholders": {}
+  },
+  "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+  "@edit": {
+    "description": "edit",
+    "type": "text",
+    "placeholders": {}
+  },
+  "create": "ਬਣਾਓ",
+  "@create": {
+    "description": "create",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordDoesntMatch": "ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ",
+  "@passwordDoesntMatch": {
+    "description": "Passwords do not match",
+    "type": "text",
+    "placeholders": {}
+  },
+  "username": "ਉਪਯੋਗਕਰਤਾ ਨਾਮ",
+  "@username": {
+    "description": "Username",
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmPassword": "ਪਾਸਵਰਡ ਪੱਕਾ ਕਰੋ",
+  "@confirmPassword": {
+    "description": "Confirm password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "changePassword": "ਪਾਸਵਰਡ ਬਦਲੋ",
+  "@changePassword": {
+    "description": "Change password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newPassword": "ਨਵਾਂ ਪਾਸਵਰਡ",
+  "@newPassword": {
+    "description": "new password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "oldPassword": "ਪੁਰਾਣਾ ਪਾਸਵਰਡ",
+  "@oldPassword": {
+    "description": "old password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "iVerified": "ਮੈਂ ਤਸਦੀਕ ਕੀਤਾ",
+  "@iVerified": {
+    "description": "I verified",
+    "type": "text",
+    "placeholders": {}
+  },
+  "resendEmail": "ਈਮੇਲ ਦੁਬਾਰਾ ਭੇਜੋ",
+  "@resendEmail": {
+    "description": "Resend email",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginError": "ਲੌਗ ਇਨ ਕਰਨ ਦੌਰਾਨ ਇੱਕ ਤਰੁੱਟੀ ਉਤਪੰਨ ਹੋਈ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.",
+  "@loginError": {
+    "description": "An error occured during log-in. Please retry.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "clear": "ਸਾਫ",
+  "@clear": {
+    "description": "clear",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cricpantherTitle": "ਕ੍ਰਿਕ ਪੈਂਥਰ",
+  "@cricpantherTitle": {
+    "description": "Cric Panther",
+    "type": "text",
+    "placeholders": {}
+  },
+  "applicationLegalese": "©2020-2021 ਬਿਗਪੈਂਥਰ ਟੈਕਨੋਲੋਜੀਜ਼ ਇੰਕ.",
+  "@applicationLegalese": {
+    "description": "©2020-2021 Big Panther Technologies Inc.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "madeWithLove": "ਕਨੇਡਾ ਵਿੱਚ ♥ ਨਾਲ ਬਣਾਇਆ ਗਿਆ",
+  "@madeWithLove": {
+    "description": "Built with ♥️ in Canada",
+    "type": "text",
+    "placeholders": {}
+  },
+  "reachUsAt": "ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+  "@reachUsAt": {
+    "description": "Reach us at",
+    "type": "text",
+    "placeholders": {}
+  }
+}

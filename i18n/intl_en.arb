@@ -1,0 +1,272 @@
+{
+  "@@locale": "en",
+  "@@last_modified": "2020-12-27T23:08:56.222858",
+  "paramRequired": "{param} is required",
+  "@paramRequired": {
+    "description": "Param required",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Name"
+      }
+    }
+  },
+  "helloParam": "Hello {param}",
+  "@helloParam": {
+    "description": "Hello param",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Username"
+      }
+    }
+  },
+  "editParam": "Edit {param}",
+  "@editParam": {
+    "description": "Edit param",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Shipment"
+      }
+    }
+  },
+  "addNewParam": "Add new {param}",
+  "@addNewParam": {
+    "description": "Add new param",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Shipment"
+      }
+    }
+  },
+  "selectParam": "Select {param}",
+  "@selectParam": {
+    "description": "Select param",
+    "type": "text",
+    "placeholders": {
+      "param": {
+        "example": "Shipment"
+      }
+    }
+  },
+
+  "createdAt": "Created at",
+  "@createdAt": {
+    "description": "Created at ",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lastUpdate": "Last update",
+  "@lastUpdate": {
+    "description": "Last update ",
+    "type": "text",
+    "placeholders": {}
+  },
+  
+  "email": "Email",
+  "@email": {
+    "description": "Email",
+    "type": "text",
+    "placeholders": {}
+  },
+
+  "home": "Home",
+  "@home": {
+    "description": "Home",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout",
+    "type": "text",
+    "placeholders": {}
+  },
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "Sign In",
+    "type": "text",
+    "placeholders": {}
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Register",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutUs": "About Us",
+  "@aboutUs": {
+    "description": "About Us",
+    "type": "text",
+    "placeholders": {}
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Name",
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcome": "Welcome to Cric Panther",
+  "@welcome": {
+    "description": "Welcome to Cric Panther",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailSent": "An Email has been sent to {emailId}. Please check your inbox.",
+  "@emailSent": {
+    "description": "An Email has been sent",
+    "type": "text",
+    "placeholders": {
+      "emailId": {
+        "example": "info@bigpanther.ca"
+      }
+    }
+  },
+  "emailNotVerified": "This Email Id is not yet verified. Please try again.",
+  "@emailNotVerified": {
+    "description": "This Email Id is not yet verified. Please try again.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "resetPassword": "Reset Password",
+  "@resetPassword": {
+    "description": "Reset Password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+    "description": "Forgot Password?",
+    "type": "text",
+    "placeholders": {}
+  },
+  "resetPasswordMessage": "An email with the reset link would be sent to you.",
+  "@resetPasswordMessage": {
+    "description": "Reset password message",
+    "type": "text",
+    "placeholders": {}
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "profile",
+    "type": "text",
+    "placeholders": {}
+  },
+  "save": "Save",
+  "@save": {
+    "description": "save",
+    "type": "text",
+    "placeholders": {}
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "edit",
+    "type": "text",
+    "placeholders": {}
+  },
+  "create": "Create",
+  "@create": {
+    "description": "create",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordDoesntMatch": "Passwords do not match",
+  "@passwordDoesntMatch": {
+    "description": "Passwords do not match",
+    "type": "text",
+    "placeholders": {}
+  },
+  "username": "Username",
+  "@username": {
+    "description": "Username",
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmPassword": "Confirm password",
+  "@confirmPassword": {
+    "description": "Confirm password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "changePassword": "Change password",
+  "@changePassword": {
+    "description": "Change password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newPassword": "New password",
+  "@newPassword": {
+    "description": "new password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "oldPassword": "Old password",
+  "@oldPassword": {
+    "description": "old password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "iVerified": "I verified",
+  "@iVerified": {
+    "description": "I verified",
+    "type": "text",
+    "placeholders": {}
+  },
+  "resendEmail": "Resend email",
+  "@resendEmail": {
+    "description": "Resend email",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginError": "An error occured during log-in. Please retry.",
+  "@loginError": {
+    "description": "An error occured during log-in. Please retry.",
+    "type": "text",
+    "placeholders": {}
+  },
+  
+  "clear": "Clear",
+  "@clear": {
+    "description": "clear",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cricpantherTitle": "Cric Panther",
+  "@cricpantherTitle": {
+    "description": "Cric Panther",
+    "type": "text",
+    "placeholders": {}
+  },
+  "applicationLegalese": "©2020-2021 Big Panther Technologies Inc.",
+  "@applicationLegalese": {
+    "description": "©2020-2021 Big Panther Technologies Inc.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "madeWithLove": "Built with ♥️ in Canada",
+  "@madeWithLove": {
+    "description": "Built with ♥️ in Canada",
+    "type": "text",
+    "placeholders": {}
+  },
+  "reachUsAt": "Reach us at",
+  "@reachUsAt": {
+    "description": "Reach us at",
+    "type": "text",
+    "placeholders": {}
+  }
+}

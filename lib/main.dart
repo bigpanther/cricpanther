@@ -1,3 +1,4 @@
+import 'package:cricpanther/l10n/locales/l10n.dart';
 import 'package:cricpanther/match/match.dart';
 import 'package:cricpanther/screens/match_create.dart';
 import 'package:cricpanther/screens/score_page_builder.dart';
@@ -5,6 +6,7 @@ import 'package:cricpanther/screens/scorecard.dart';
 import 'package:cricpanther/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +31,15 @@ class MyApp extends StatelessWidget {
         theme: Cricpanther.lightTheme,
         themeMode: ThemeMode.system,
         home: MatchCreate(title: 'Start Match'),
+        localizationsDelegates: [
+          AppLocalizationDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', ''),
+        ],
       ),
     );
   }
