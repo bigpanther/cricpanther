@@ -7,7 +7,7 @@ import 'package:cricpanther/match/match.dart';
 
 class ScorePageBuilder extends StatelessWidget {
   static final String routeName = '/scorepage';
-  ScorePageBuilder({Key key, this.title}) : super(key: key);
+  ScorePageBuilder({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -15,7 +15,7 @@ class ScorePageBuilder extends StatelessWidget {
     return ChangeNotifierProvider<Scoresheet>(
         create: (context) {
           var match = Provider.of<Match>(context, listen: false);
-          var batPicker = PlayerPicker(match.battingTeam.players);
+          var batPicker = PlayerPicker(match.battingTeam!.players);
           var ballPicker = PlayerPicker(match.bowlingTeam.players);
           return Scoresheet(batPicker: batPicker, ballPicker: ballPicker);
         },

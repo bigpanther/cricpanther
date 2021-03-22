@@ -26,17 +26,15 @@ class Scoresheet with ChangeNotifier {
   final PlayerPicker ballPicker;
   final PlayerPicker batPicker;
 
-  var lastSevenDeliveries = List<String>();
+  var lastSevenDeliveries = [];
 
   Scoresheet({
-    @required this.batPicker,
-    @required this.ballPicker,
-  }) {
-    this.currentBatter1 = batPicker.next();
-    this.currentBatter2 = batPicker.next();
-    this.currentBowler1 = ballPicker.next();
-    this.currentBowler2 = ballPicker.next();
-  }
+    required this.batPicker,
+    required this.ballPicker,
+  })   : this.currentBatter1 = batPicker.next(),
+        this.currentBatter2 = batPicker.next(),
+        this.currentBowler1 = ballPicker.next(),
+        this.currentBowler2 = ballPicker.next();
 
   void _addRuns(Delivery delivery) {
     isCurrentMaiden = false;

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class MatchCreate extends StatefulWidget {
   final String title;
 
-  MatchCreate({Key key, this.title}) : super(key: key);
+  MatchCreate({Key? key, required this.title}) : super(key: key);
   @override
   MatchCreateState createState() {
     return MatchCreateState();
@@ -16,10 +16,10 @@ class MatchCreate extends StatefulWidget {
 
 class MatchCreateState extends State<MatchCreate> {
   final _formKey = GlobalKey<FormState>();
-  String homeTeamName;
-  String awayTeamName;
-  int totalOvers;
-  int maxPlayers;
+  late String homeTeamName;
+  late String awayTeamName;
+  late int totalOvers;
+  late int maxPlayers;
   bool isSecondInnings = false;
   int target = 0;
   @override
@@ -43,7 +43,7 @@ class MatchCreateState extends State<MatchCreate> {
                     maxLength: 30,
                     autocorrect: false,
                     initialValue: Match.defaultHomeTeamName,
-                    maxLengthEnforced: true,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     decoration: InputDecoration(
                       hintText: '${match.homeTeam.name} name',
                       labelText: '${match.homeTeam.name} Name *',
@@ -52,13 +52,13 @@ class MatchCreateState extends State<MatchCreate> {
                     validator: (value) {
                       return checkRequired(value);
                     },
-                    onSaved: (val) => setState(() => homeTeamName = val),
+                    onSaved: (val) => setState(() => homeTeamName = val!),
                   ),
                   TextFormField(
                     maxLength: 30,
                     autocorrect: false,
                     initialValue: Match.defaultAwayTeamName,
-                    maxLengthEnforced: true,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     decoration: InputDecoration(
                       hintText: '${match.awayTeam.name} name',
                       labelText: '${match.awayTeam.name} Name *',
@@ -67,55 +67,55 @@ class MatchCreateState extends State<MatchCreate> {
                     validator: (value) {
                       return checkRequired(value);
                     },
-                    onSaved: (val) => setState(() => awayTeamName = val),
+                    onSaved: (val) => setState(() => awayTeamName = val!),
                   ),
                   TextFormField(
                     maxLength: 2,
                     initialValue: '50',
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.digitsOnly
                     ],
                     autocorrect: false,
-                    maxLengthEnforced: true,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     decoration: InputDecoration(
                       hintText: '50',
                       labelText: 'Overs',
                       counterText: '',
                     ),
                     validator: (value) {
-                      var val = int.parse(value);
+                      var val = int.parse(value!);
                       if (val <= 0 || val > 50) {
                         return "Please enter a value between 1 and 50";
                       }
                       return null;
                     },
                     onSaved: (val) =>
-                        setState(() => totalOvers = int.parse(val)),
+                        setState(() => totalOvers = int.parse(val!)),
                   ),
                   TextFormField(
                     maxLength: 2,
                     initialValue: '11',
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.digitsOnly
                     ],
                     autocorrect: false,
-                    maxLengthEnforced: true,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     decoration: InputDecoration(
                       hintText: '11',
                       labelText: 'Number of players per team',
                       counterText: '',
                     ),
                     validator: (value) {
-                      var val = int.parse(value);
+                      var val = int.parse(value!);
                       if (val <= 1 || val > 11) {
                         return "Please enter a value between 2 and 11";
                       }
                       return null;
                     },
                     onSaved: (val) =>
-                        setState(() => maxPlayers = int.parse(val)),
+                        setState(() => maxPlayers = int.parse(val!)),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,11 +136,11 @@ class MatchCreateState extends State<MatchCreate> {
                     initialValue: '0',
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.digitsOnly
                     ],
                     readOnly: !isSecondInnings,
                     autocorrect: false,
-                    maxLengthEnforced: true,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     decoration: InputDecoration(
                       hintText: '0',
                       labelText:
@@ -148,18 +148,19 @@ class MatchCreateState extends State<MatchCreate> {
                       counterText: '',
                     ),
                     validator: (value) {
-                      var val = int.parse(value);
+                      var val = int.parse(value!);
                       if (isSecondInnings && (val <= 0 || val > 999)) {
                         return "Please enter a value between 1 and 1000";
                       }
                       return null;
                     },
-                    onSaved: (val) => setState(() => target = int.parse(val)),
+                    onSaved: (val) => setState(() => target = int.parse(val!)),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        _formKey.currentState.save();
+                      final state = _formKey.currentState;
+                      if (state != null && state.validate()) {
+                        state.save();
                         match.homeTeam.name = homeTeamName;
                         match.awayTeam.name = awayTeamName;
                         match.totalOvers = totalOvers;
@@ -185,8 +186,8 @@ class MatchCreateState extends State<MatchCreate> {
     );
   }
 
-  String checkRequired(String value) {
-    if (value.isEmpty) {
+  String? checkRequired(String? value) {
+    if (value == null || value.isEmpty) {
       return 'Please enter team name';
     }
     return null;

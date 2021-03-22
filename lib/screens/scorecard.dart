@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class Scorecard extends StatelessWidget {
   static final String routeName = '/scorecard';
   final String title;
-  Scorecard({Key key, this.title}) : super(key: key);
+  Scorecard({Key? key, required this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var match = Provider.of<Match>(context);
@@ -21,7 +21,7 @@ class Scorecard extends StatelessWidget {
           title: Text(this.title),
           bottom: TabBar(
             tabs: [
-              Text(match.battingTeam.name),
+              Text(match.battingTeam!.name),
               Text(match.bowlingTeam.name),
             ],
           ),
@@ -29,9 +29,11 @@ class Scorecard extends StatelessWidget {
         body: TabBarView(
           children: [
             teamScore(
-                battingTeam: match.battingTeam, bowlingTeam: match.bowlingTeam),
+                battingTeam: match.battingTeam!,
+                bowlingTeam: match.bowlingTeam),
             teamScore(
-                battingTeam: match.bowlingTeam, bowlingTeam: match.battingTeam),
+                battingTeam: match.bowlingTeam,
+                bowlingTeam: match.battingTeam!),
           ],
         ),
       ),
@@ -40,7 +42,7 @@ class Scorecard extends StatelessWidget {
   }
 
   SingleChildScrollView teamScore(
-      {@required Team battingTeam, @required Team bowlingTeam}) {
+      {required Team battingTeam, required Team bowlingTeam}) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[

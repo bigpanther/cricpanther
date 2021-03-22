@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 class ScorePage extends StatelessWidget {
   static final String routeName = '/scorepage';
   final String title;
-  ScorePage({Key key, this.title}) : super(key: key);
+  ScorePage({Key? key, required this.title}) : super(key: key);
 
   final runs = List<int>.generate(300, (i) => i % 6);
 
@@ -47,7 +47,7 @@ class ScorePage extends StatelessWidget {
                   children: <Widget>[
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
-                        '${match.battingTeam.name} - Batting',
+                        '${match.battingTeam!.name} - Batting',
                         style: Theme.of(context).textTheme.headline,
                       ),
                       IconButton(
@@ -71,7 +71,7 @@ class ScorePage extends StatelessWidget {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         '${match.bowlingTeam.name} - Bowling',
-                        style: Theme.of(context).textTheme.headline,
+                        style: Theme.of(context).textTheme.headline5,
                       ),
                       IconButton(
                         onPressed: () async {
@@ -232,7 +232,7 @@ class ScorePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    RaisedButton(
+                    ElevatedButton(
                       child: Text('Add'),
                       onPressed: () => scoresheet.recordDelivery(delivery),
                     ),

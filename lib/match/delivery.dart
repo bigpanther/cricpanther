@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 class Delivery with ChangeNotifier {
   int runs = 0;
-  Player batter;
-  Player bowler;
+  Player? batter;
+  Player? bowler;
   var extras = [Extra.none];
   var out = Out.none;
-  Player fielder;
+  Player? fielder;
   addBatter(Player p) {
     batter = p;
   }

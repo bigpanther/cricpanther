@@ -10,7 +10,7 @@ class Player {
   BowlingStats bowlingStats;
   String id;
   String name;
-  String exid;
+  String? exid;
   var isSubstitute = false;
   var isWicketKeeper = false;
   var batting = Handedness.right;
@@ -20,11 +20,11 @@ class Player {
   //var fellOn = '';
 
   bool get isOut => out != Out.none;
-  Player(this.name) : assert(name.trim().length != 0) {
-    this.id = UUID.uuid();
-    battingStats = BattingStats();
-    bowlingStats = BowlingStats();
-  }
+  Player(this.name)
+      : this.id = UUID.uuid(),
+        battingStats = BattingStats(),
+        bowlingStats = BowlingStats(),
+        assert(name.trim().length != 0) {}
   @override
   String toString() {
     return name;
