@@ -10,15 +10,15 @@ import 'package:cricpanther/widgets/batter_summary.dart';
 import 'package:cricpanther/widgets/bowler_summary.dart';
 import 'package:cricpanther/widgets/player_picker.dart';
 import 'package:cricpanther/widgets/scoreboard.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:provider/provider.dart';
 
 class ScorePage extends StatelessWidget {
-  static final String routeName = '/scorepage';
+  static const String routeName = '/scorepage';
   final String title;
-  ScorePage({Key? key, required this.title}) : super(key: key);
+  ScorePage({super.key, required this.title});
 
   final runs = List<int>.generate(300, (i) => i % 6);
 
@@ -31,7 +31,7 @@ class ScorePage extends StatelessWidget {
       appBar: AppBar(
         // Here we take the value from thre ScorePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(this.title),
+        title: Text(title),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -48,12 +48,12 @@ class ScorePage extends StatelessWidget {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         '${match.battingTeam!.name} - Batting',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       IconButton(
                         onPressed: scoresheet.changeStrike,
                         tooltip: 'Change Strike',
-                        icon: Icon(Icons.compare_arrows),
+                        icon: const Icon(Icons.compare_arrows),
                       ),
                     ]),
                     batterSummary(scoresheet.currentBatter1, true),
@@ -71,21 +71,21 @@ class ScorePage extends StatelessWidget {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         '${match.bowlingTeam.name} - Bowling',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       IconButton(
                         onPressed: () async {
                           var newBowler = await showPlayerPicker(
                             context,
                             match.bowlingTeam.players,
-                            "Select Bowler",
+                            'Select Bowler',
                           );
                           if (newBowler != null) {
                             scoresheet.changeBowler(newBowler);
                           }
                         },
                         tooltip: 'Change Bowler',
-                        icon: Icon(Icons.compare_arrows),
+                        icon: const Icon(Icons.compare_arrows),
                       ),
                     ]),
                     bowlerSummary(scoresheet.currentBowler1, true),
@@ -94,7 +94,7 @@ class ScorePage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: 50,
               child: ListView.separated(
                 shrinkWrap: false,
@@ -106,19 +106,19 @@ class ScorePage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   if (scoresheet.lastSevenDeliveries[index] != '|') {
                     return Container(
-                      margin: EdgeInsets.only(top: 3, bottom: 3),
+                      margin: const EdgeInsets.only(top: 3, bottom: 3),
                       width: 55,
+                      decoration: const BoxDecoration(
+                          color: Colors.red, shape: BoxShape.circle),
                       child: Center(
                         child: Text(
                           scoresheet.lastSevenDeliveries[index],
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
-                      decoration: BoxDecoration(
-                          color: Colors.red, shape: BoxShape.circle),
                     );
                   }
-                  return Container(
+                  return const SizedBox(
                     height: 0,
                     width: 0,
                   );
@@ -159,14 +159,14 @@ class ScorePage extends StatelessWidget {
                     margin: EdgeInsets.only(top: 3, bottom: 3),
                     width: 55,
                     height: 55,
+                    decoration: const BoxDecoration(
+                        color: Colors.red, shape: BoxShape.circle),
                     child: Center(
                       child: Text(
                         delivery.shortSummary(),
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.red, shape: BoxShape.circle),
                   )
                 ]),
                 Row(
@@ -174,27 +174,27 @@ class ScorePage extends StatelessWidget {
                     children: [
                       FloatingActionButton(
                         heroTag: 'penalty',
-                        shape: CircleBorder(side: BorderSide.none),
+                        shape: const CircleBorder(side: BorderSide.none),
                         onPressed: () => delivery.addExtra(Extra.penalty),
-                        child: Text('Pen.'),
+                        child: const Text('Pen.'),
                       ),
                       FloatingActionButton(
                         heroTag: 'byes',
-                        shape: CircleBorder(side: BorderSide.none),
+                        shape: const CircleBorder(side: BorderSide.none),
                         onPressed: () => delivery.addExtra(Extra.bye),
-                        child: Text('Bye'),
+                        child: const Text('Bye'),
                       ),
                       FloatingActionButton(
                         heroTag: 'lbs',
-                        shape: CircleBorder(side: BorderSide.none),
+                        shape: const CircleBorder(side: BorderSide.none),
                         onPressed: () => delivery.addExtra(Extra.legBye),
-                        child: Text('LB'),
+                        child: const Text('LB'),
                       ),
                       FloatingActionButton(
                         heroTag: 'bonus',
-                        shape: CircleBorder(side: BorderSide.none),
+                        shape: const CircleBorder(side: BorderSide.none),
                         onPressed: () => delivery.addExtra(Extra.bonus),
-                        child: Text('Bonus'),
+                        child: const Text('Bonus'),
                       ),
                     ]),
                 Padding(
@@ -204,28 +204,28 @@ class ScorePage extends StatelessWidget {
                       children: [
                         FloatingActionButton(
                           heroTag: 'wkt',
-                          shape: CircleBorder(side: BorderSide.none),
+                          shape: const CircleBorder(side: BorderSide.none),
                           onPressed: () => showOutPicker(
                               context, match, scoresheet, delivery),
-                          child: Text('Wkt'),
+                          child: const Text('Wkt'),
                         ),
                         FloatingActionButton(
                           heroTag: 'wides',
-                          shape: CircleBorder(side: BorderSide.none),
+                          shape: const CircleBorder(side: BorderSide.none),
                           onPressed: () => delivery.addExtra(Extra.wide),
-                          child: Text('Wide'),
+                          child: const Text('Wide'),
                         ),
                         FloatingActionButton(
                           heroTag: 'runs',
-                          shape: CircleBorder(side: BorderSide.none),
+                          shape: const CircleBorder(side: BorderSide.none),
                           onPressed: () => delivery.addRuns(1),
-                          child: Text('Runs'),
+                          child: const Text('Runs'),
                         ),
                         FloatingActionButton(
                           heroTag: 'noBalls',
-                          shape: CircleBorder(side: BorderSide.none),
+                          shape: const CircleBorder(side: BorderSide.none),
                           onPressed: () => delivery.addExtra(Extra.noBall),
-                          child: Text('NB'),
+                          child: const Text('NB'),
                         ),
                       ]),
                 ),
@@ -233,7 +233,7 @@ class ScorePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ElevatedButton(
-                      child: Text('Add'),
+                      child: const Text('Add'),
                       onPressed: () => scoresheet.recordDelivery(delivery),
                     ),
                   ],
@@ -243,13 +243,13 @@ class ScorePage extends StatelessWidget {
           );
         },
       ),
-      create: (BuildContext context) => new Delivery(),
+      create: (BuildContext context) => Delivery(),
     );
   }
 
   Widget buildDivider(Scoresheet scoresheet, int index) {
     if (scoresheet.lastSevenDeliveries[index] == '|') {
-      return new Container(
+      return Container(
         height: 30.0,
         width: 1.0,
         color: Colors.black,
@@ -257,7 +257,7 @@ class ScorePage extends StatelessWidget {
       );
     }
     // if (index % 6 == 0) {}
-    return Container(
+    return const SizedBox(
       height: 0,
       width: 0,
     );
@@ -268,10 +268,10 @@ class ScorePage extends StatelessWidget {
     delivery.out = await () {
       var c = new Completer<Out>();
       Picker(
-          adapter: PickerDataAdapter<Out>(pickerdata: OutExtension.all()),
+          adapter: PickerDataAdapter<Out>(pickerData: OutExtension.all()),
           changeToFirst: true,
           hideHeader: true,
-          title: Text("Select Out type"),
+          title: const Text("Select Out type"),
           selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
           onCancel: c.complete,
           onConfirm: (Picker picker, List value) {

@@ -5,8 +5,8 @@ import 'team.dart';
 
 class Match with ChangeNotifier {
   bool firstInnings = true;
-  static const defaultHomeTeamName = "T1";
-  static const defaultAwayTeamName = "T2";
+  static const defaultHomeTeamName = 'T1';
+  static const defaultAwayTeamName = 'T2';
   String id = UUID.uuid();
   int _totalOvers = 0;
   set totalOvers(val) => _totalOvers = val;
@@ -27,19 +27,19 @@ class Match with ChangeNotifier {
   }
 
   void start({required Team toss, required Team batting}) {
-    this.tossTeam = toss;
-    this.battingTeam = batting;
-    this.battingTeam!.isBatting = true;
-    this.bowlingTeam.isBatting = false;
+    tossTeam = toss;
+    battingTeam = batting;
+    battingTeam!.isBatting = true;
+    bowlingTeam.isBatting = false;
   }
 
   void endFirstInnings() {
     firstInnings = false;
-    var currentBatting = this.battingTeam;
+    var currentBatting = battingTeam;
     currentBatting!.isBatting = false;
-    this.bowlingTeam.isBatting = true;
-    this.battingTeam = this.bowlingTeam;
-    this.battingTeam = currentBatting;
+    bowlingTeam.isBatting = true;
+    battingTeam = bowlingTeam;
+    battingTeam = currentBatting;
     notifyListeners();
   }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new, prefer_const_literals_to_create_immutables
+
 import 'package:cricpanther/l10n/locales/l10n.dart';
 import 'package:cricpanther/match/match.dart';
 import 'package:cricpanther/screens/match_create.dart';
@@ -32,12 +34,12 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         home: MatchCreate(title: 'Start Match'),
         localizationsDelegates: [
-          AppLocalizationDelegate(),
+          const AppLocalizationDelegate(),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: AppLocalizationDelegate().supportedLocales,
+        supportedLocales: const AppLocalizationDelegate().supportedLocales,
       ),
     );
   }

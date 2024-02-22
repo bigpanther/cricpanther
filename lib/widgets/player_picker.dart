@@ -20,7 +20,7 @@ Future<Player?> showPlayerPicker(
   return await () {
     var c = new Completer<Player>();
     Picker(
-        adapter: PickerDataAdapter<Player>(pickerdata: players),
+        adapter: PickerDataAdapter<Player>(pickerData: players),
         changeToFirst: true,
         hideHeader: true,
         title: Text(title),

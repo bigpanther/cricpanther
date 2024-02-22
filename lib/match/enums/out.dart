@@ -10,7 +10,6 @@ enum Out {
   obstruction,
   retired,
   hitTwice,
-  mankad
 }
 
 extension OutExtension on Out {
@@ -27,7 +26,7 @@ extension OutExtension on Out {
       case Out.stumped:
         return 'Stumped';
       case Out.runOut:
-        return "Run out";
+        return 'Run out';
       case Out.timeOut:
         return 'Time Out';
       case Out.hitWicket:
@@ -38,8 +37,6 @@ extension OutExtension on Out {
         return 'Retired';
       case Out.hitTwice:
         return 'Hit twice';
-      case Out.mankad:
-        return 'Mankad';
     }
   }
 
@@ -53,7 +50,6 @@ extension OutExtension on Out {
       Out.stumped,
       Out.retired,
       Out.obstruction,
-      Out.mankad,
       Out.hitWicket,
       Out.timeOut,
       Out.hitTwice,
@@ -61,7 +57,7 @@ extension OutExtension on Out {
   }
 
   bool requiresBallToBeBowled() {
-    return ![Out.mankad, Out.timeOut].contains(this);
+    return ![Out.runOut, Out.timeOut].contains(this);
   }
 
   bool requiresFielder() {
