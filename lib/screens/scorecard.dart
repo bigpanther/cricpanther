@@ -1,24 +1,24 @@
 import 'package:cricpanther/match/match.dart';
 import 'package:cricpanther/match/enums/out.dart';
 import 'package:cricpanther/match/team.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Scorecard extends StatelessWidget {
-  static final String routeName = '/scorecard';
+  static const String routeName = '/scorecard';
   final String title;
-  Scorecard({Key? key, required this.title}) : super(key: key);
+  const Scorecard({super.key, required this.title});
   @override
   Widget build(BuildContext context) {
     var match = Provider.of<Match>(context);
     print('build scorecard');
     return DefaultTabController(
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           // Here we take the value from thre ScorePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text(this.title),
+          title: Text(title),
           bottom: TabBar(
             tabs: [
               Text(match.battingTeam!.name),
@@ -37,7 +37,6 @@ class Scorecard extends StatelessWidget {
           ],
         ),
       ),
-      length: 2,
     );
   }
 
@@ -46,10 +45,10 @@ class Scorecard extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          Text("Batting"),
+          const Text('Batting'),
           DataTable(
             columnSpacing: 5.0,
-            columns: [
+            columns: const [
               DataColumn(
                 label: Text('Player'),
               ),
@@ -78,7 +77,7 @@ class Scorecard extends StatelessWidget {
                         //showEditIcon: true,
                       ),
                       DataCell(
-                        Text('${p.out.text}'),
+                        Text(p.out.text),
                       ),
                       DataCell(
                         Text('${p.battingStats.runs}(${p.battingStats.balls})'),
@@ -94,10 +93,10 @@ class Scorecard extends StatelessWidget {
                 )
                 .toList(),
           ),
-          Text("Bowling"),
+          const Text('Bowling'),
           DataTable(
             columnSpacing: 5.0,
-            columns: [
+            columns: const [
               DataColumn(
                 label: Text('Player'),
               ),
@@ -135,7 +134,7 @@ class Scorecard extends StatelessWidget {
                         //showEditIcon: true,
                       ),
                       DataCell(
-                        Text('${p.bowlingStats.oversBowled}'),
+                        Text(p.bowlingStats.oversBowled),
                       ),
                       DataCell(
                         Text('${p.bowlingStats.maidens}'),

@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class MatchCreate extends StatefulWidget {
   final String title;
 
-  MatchCreate({Key? key, required this.title}) : super(key: key);
+  const MatchCreate({super.key, required this.title});
   @override
   MatchCreateState createState() {
     return MatchCreateState();
@@ -40,7 +40,7 @@ class MatchCreateState extends State<MatchCreate> {
             Form(
               key: _formKey,
               child: Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Column(children: <Widget>[
                   TextFormField(
                     maxLength: 30,
@@ -81,7 +81,7 @@ class MatchCreateState extends State<MatchCreate> {
                     ],
                     autocorrect: false,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: '50',
                       labelText: 'Overs',
                       counterText: '',
@@ -89,7 +89,7 @@ class MatchCreateState extends State<MatchCreate> {
                     validator: (value) {
                       var val = int.parse(value!);
                       if (val <= 0 || val > 50) {
-                        return "Please enter a value between 1 and 50";
+                        return 'Please enter a value between 1 and 50';
                       }
                       return null;
                     },
@@ -105,7 +105,7 @@ class MatchCreateState extends State<MatchCreate> {
                     ],
                     autocorrect: false,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: '11',
                       labelText: 'Number of players per team',
                       counterText: '',
@@ -113,7 +113,7 @@ class MatchCreateState extends State<MatchCreate> {
                     validator: (value) {
                       var val = int.parse(value!);
                       if (val <= 1 || val > 11) {
-                        return "Please enter a value between 2 and 11";
+                        return 'Please enter a value between 2 and 11';
                       }
                       return null;
                     },
@@ -123,7 +123,7 @@ class MatchCreateState extends State<MatchCreate> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("Record second innings only"),
+                      const Text('Record second innings only'),
                       Switch.adaptive(
                         onChanged: (bool value) {
                           setState(() {
@@ -144,7 +144,7 @@ class MatchCreateState extends State<MatchCreate> {
                     readOnly: !isSecondInnings,
                     autocorrect: false,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: '0',
                       labelText:
                           'Target (set when recording only the second innings)',
@@ -153,7 +153,7 @@ class MatchCreateState extends State<MatchCreate> {
                     validator: (value) {
                       var val = int.parse(value!);
                       if (isSecondInnings && (val <= 0 || val > 999)) {
-                        return "Please enter a value between 1 and 1000";
+                        return 'Please enter a value between 1 and 1000';
                       }
                       return null;
                     },
@@ -178,7 +178,7 @@ class MatchCreateState extends State<MatchCreate> {
                             context, ScorePageBuilder.routeName);
                       }
                     },
-                    child: Text('Start match'),
+                    child: const Text('Start match'),
                   ),
                 ]),
               ),
@@ -186,14 +186,15 @@ class MatchCreateState extends State<MatchCreate> {
             RichText(
               text: TextSpan(
                 text: CricpantherLocalizations.of(context).aboutUs,
-                style: Theme.of(context).textTheme.bodyText1,
-                recognizer: new TapGestureRecognizer()
+                style: Theme.of(context).textTheme.bodyLarge,
+                recognizer: TapGestureRecognizer()
                   ..onTap = () async {
                     final packageInfo = await PackageInfo.fromPlatform();
                     final appName = packageInfo.appName;
                     final version = packageInfo.version;
+                    if (!mounted) return;
                     final themeData = Theme.of(context);
-                    final msgStyle = themeData.textTheme.bodyText1;
+                    final msgStyle = themeData.textTheme.bodyLarge;
                     final localization = CricpantherLocalizations.of(context);
                     final linkStyle =
                         msgStyle!.copyWith(color: themeData.primaryColor);
@@ -228,7 +229,7 @@ class MatchCreateState extends State<MatchCreate> {
                                   text: '\n',
                                 ),
                                 TextSpan(
-                                  style: themeData.textTheme.caption,
+                                  style: themeData.textTheme.bodySmall,
                                   text: localization.madeWithLove,
                                 ),
                               ],

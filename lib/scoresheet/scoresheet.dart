@@ -31,89 +31,89 @@ class Scoresheet with ChangeNotifier {
   Scoresheet({
     required this.batPicker,
     required this.ballPicker,
-  })   : this.currentBatter1 = batPicker.next(),
-        this.currentBatter2 = batPicker.next(),
-        this.currentBowler1 = ballPicker.next(),
-        this.currentBowler2 = ballPicker.next();
+  })  : currentBatter1 = batPicker.next(),
+        currentBatter2 = batPicker.next(),
+        currentBowler1 = ballPicker.next(),
+        currentBowler2 = ballPicker.next();
 
   void _addRuns(Delivery delivery) {
     isCurrentMaiden = false;
     if (delivery.extras[0] == Extra.none) {
       _addRunsForBatter(delivery.runs);
       _addRunsAgainstBowler(delivery.runs);
-      this.currentRuns += delivery.runs;
+      currentRuns += delivery.runs;
       return;
     }
     if (delivery.isWide()) {
-      this.currentRuns += delivery.runs + 1;
-      this.currentWides += delivery.runs + 1;
+      currentRuns += delivery.runs + 1;
+      currentWides += delivery.runs + 1;
       _addRunsAgainstBowler(delivery.runs + 1);
     }
     if (delivery.isNoBall()) {
-      this.currentRuns++;
-      this.currentNoBalls++;
+      currentRuns++;
+      currentNoBalls++;
       _addRunsAgainstBowler(1);
       if (delivery.runs > 0 && !delivery.isLegBye() && !delivery.isBye()) {
-        this.currentRuns += delivery.runs;
+        currentRuns += delivery.runs;
         _addRunsForBatter(delivery.runs);
         _addRunsAgainstBowler(delivery.runs);
       }
     }
     if (delivery.isLegBye()) {
-      this.currentLegByes += delivery.runs;
-      this.currentRuns += delivery.runs;
+      currentLegByes += delivery.runs;
+      currentRuns += delivery.runs;
     }
     if (delivery.isBye()) {
-      this.currentByes += delivery.runs;
-      this.currentRuns += delivery.runs;
+      currentByes += delivery.runs;
+      currentRuns += delivery.runs;
     }
     if (delivery.isPenalty()) {
-      this.currentRuns -= delivery.runs;
-      this.currentPenalty += delivery.runs;
+      currentRuns -= delivery.runs;
+      currentPenalty += delivery.runs;
     }
     if (delivery.isBonus()) {
-      this.currentRuns += delivery.runs;
-      this.currentBonus += delivery.runs;
+      currentRuns += delivery.runs;
+      currentBonus += delivery.runs;
     }
   }
 
   void _addRunsForBatter(int runs) {
-    this.currentBatter1.battingStats.runs += runs;
+    currentBatter1.battingStats.runs += runs;
   }
 
   void _addWicket(Delivery delivery) {
     if (delivery.out == Out.none) return;
     if (delivery.out.isBowlersWicket()) {
-      this.currentBowler1.bowlingStats.wickets++;
+      currentBowler1.bowlingStats.wickets++;
     }
-    this.currentWickets++;
+    currentWickets++;
     if (delivery.batter == null) {
-      this.currentBatter1.out = delivery.out;
-      this.currentBatter1 = batPicker.next();
+      currentBatter1.out = delivery.out;
+      currentBatter1 = batPicker.next();
       return;
     }
-    if (delivery.batter == this.currentBatter1) {
-      this.currentBatter1.out = delivery.out;
-      this.currentBatter1 = batPicker.next();
+    if (delivery.batter == currentBatter1) {
+      currentBatter1.out = delivery.out;
+      currentBatter1 = batPicker.next();
     } else {
-      this.currentBatter2.out = delivery.out;
-      this.currentBatter2 = batPicker.next();
+      currentBatter2.out = delivery.out;
+      currentBatter2 = batPicker.next();
     }
   }
 
   void _addRunsAgainstBowler(int runs) {
-    this.currentBowler1.bowlingStats.runs += runs;
+    currentBowler1.bowlingStats.runs += runs;
   }
 
   void _incrementBalls(Delivery delivery) {
     if (delivery.extras.isLegitBall()) {
       isOverInProgress = true;
-      this.currentBalls++;
-      this.currentBatter1.battingStats.balls++;
-      this.currentBowler1.bowlingStats.balls++;
+      currentBalls++;
+      currentBatter1.battingStats.balls++;
+      currentBowler1.bowlingStats.balls++;
     }
     if (delivery.isNoBall()) {
-      this.currentBatter1.battingStats.balls++;
+      currentBatter1.battingStats.balls++;
     }
   }
 
@@ -160,7 +160,7 @@ class Scoresheet with ChangeNotifier {
       _changeStrike();
     }
     lastSevenDeliveries.add(delivery.shortSummary());
-    if (Over.finished(this.currentBalls) && isOverInProgress) {
+    if (Over.finished(currentBalls) && isOverInProgress) {
       lastSevenDeliveries.add('|');
       _concludeOver();
     }

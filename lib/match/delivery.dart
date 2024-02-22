@@ -44,16 +44,16 @@ class Delivery with ChangeNotifier {
     }
     if (extras[0] == Extra.none) {
       extras[0] = e;
-      if (this.runs == 0 && e != Extra.wide && e != Extra.noBall) {
-        this.runs = 1;
+      if (runs == 0 && e != Extra.wide && e != Extra.noBall) {
+        runs = 1;
       }
     } else if (!e.allowedWith(extras)) {
       return;
     } else {
       extras.add(e);
       print(e);
-      if (this.runs == 0 && e != Extra.wide && e != Extra.noBall) {
-        this.runs = 1;
+      if (runs == 0 && e != Extra.wide && e != Extra.noBall) {
+        runs = 1;
       }
     }
     notifyListeners();
@@ -83,7 +83,7 @@ class Delivery with ChangeNotifier {
     }
     var ext = '';
     if (extras[0] != Extra.none) {
-      ext = '${extras.map((e) => e.shortCode()).join('+')}';
+      ext = extras.map((e) => e.shortCode()).join('+');
     }
     var tail = [wicket, ext].where((t) => t != '').join('+');
     if (tail != '' && runs == 0) {

@@ -10,11 +10,11 @@ enum Extra {
 
 extension ExtraListExtension on List<Extra> {
   bool isLegitBall() {
-    if (this.length < 1 || this[0] == Extra.none) return true;
-    return !this.contains(Extra.wide) &&
-        !this.contains(Extra.noBall) &&
-        !this.contains(Extra.penalty) &&
-        !this.contains(Extra.bonus);
+    if (length < 1 || this[0] == Extra.none) return true;
+    return !contains(Extra.wide) &&
+        !contains(Extra.noBall) &&
+        !contains(Extra.penalty) &&
+        !contains(Extra.bonus);
   }
 }
 

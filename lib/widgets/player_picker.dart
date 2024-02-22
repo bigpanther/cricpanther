@@ -18,7 +18,7 @@ Future<Player?> showPlayerPicker(
   String title,
 ) async {
   return await () {
-    var c = new Completer<Player>();
+    var c = Completer<Player>();
     Picker(
         adapter: PickerDataAdapter<Player>(pickerData: players),
         changeToFirst: true,

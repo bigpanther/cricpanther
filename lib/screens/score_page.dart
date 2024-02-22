@@ -98,7 +98,7 @@ class ScorePage extends StatelessWidget {
               height: 50,
               child: ListView.separated(
                 shrinkWrap: false,
-                padding: EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 20),
                 scrollDirection: Axis.horizontal,
                 itemCount: scoresheet.lastSevenDeliveries.length,
                 separatorBuilder: (context, index) =>
@@ -156,7 +156,7 @@ class ScorePage extends StatelessWidget {
               children: <Widget>[
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Container(
-                    margin: EdgeInsets.only(top: 3, bottom: 3),
+                    margin: const EdgeInsets.only(top: 3, bottom: 3),
                     width: 55,
                     height: 55,
                     decoration: const BoxDecoration(
@@ -164,7 +164,7 @@ class ScorePage extends StatelessWidget {
                     child: Center(
                       child: Text(
                         delivery.shortSummary(),
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ),
                   )
@@ -266,12 +266,12 @@ class ScorePage extends StatelessWidget {
   showOutPicker(BuildContext context, Match match, Scoresheet scoresheet,
       Delivery delivery) async {
     delivery.out = await () {
-      var c = new Completer<Out>();
+      var c = Completer<Out>();
       Picker(
           adapter: PickerDataAdapter<Out>(pickerData: OutExtension.all()),
           changeToFirst: true,
           hideHeader: true,
-          title: const Text("Select Out type"),
+          title: const Text('Select Out type'),
           selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
           onCancel: c.complete,
           onConfirm: (Picker picker, List value) {
@@ -280,21 +280,21 @@ class ScorePage extends StatelessWidget {
           }).showDialog(context);
       return c.future;
     }();
-    if (delivery.out.requiresBatter()) {
+    if (delivery.out.requiresBatter() && context.mounted) {
       delivery.batter = await showPlayerPicker(
         context,
         [scoresheet.currentBatter1, scoresheet.currentBatter2],
-        "Select batter",
+        'Select batter',
       );
       if (delivery.batter == null) {
         delivery.out = Out.none;
       }
     }
-    if (delivery.out.requiresFielder()) {
+    if (delivery.out.requiresFielder() && context.mounted) {
       delivery.fielder = await showPlayerPicker(
         context,
         match.bowlingTeam.players,
-        "Select fielder",
+        'Select fielder',
       );
       if (delivery.fielder == null) {
         delivery.out = Out.none;

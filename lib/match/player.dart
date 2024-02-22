@@ -21,10 +21,10 @@ class Player {
 
   bool get isOut => out != Out.none;
   Player(this.name)
-      : this.id = UUID.uuid(),
+      : id = UUID.uuid(),
         battingStats = BattingStats(),
         bowlingStats = BowlingStats(),
-        assert(name.trim().length != 0);
+        assert(name.trim().isNotEmpty);
   @override
   String toString() {
     return name;
